@@ -83,7 +83,9 @@
           </li>
           
           <li class="nav-item text-white"> <a class="nav-link" href="#">|</a> </li>
-          
+          <li class="nav-item">
+            <a class="nav-link" href="tanammasuk.php" data-toggle="tooltip" title="Data Barang Masuk"><i class="fas fa-inbox"></i></a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="favorit.php" data-toggle="tooltip" title="Favorit"><i class="fas fa-star"></i></a>
           </li>
@@ -93,20 +95,17 @@
           <li class="nav-item">
             <a class="nav-link" href="transaksi.php" data-toggle="tooltip" title="Transaksi Service"><i class="fab fa-flipboard"></i></a>
           </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="flashsale.php" data-toggle="tooltip" title="Flash Sale"><i class="fab fa-optin-monster"></i></a>
-          </li> -->
           <li class="nav-item">
             <a class="nav-link" href="kirim.php" data-toggle="tooltip" title="Pengiriman"><i class="fas fa-shipping-fast"></i></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="pendapatan.php" data-toggle="tooltip" title="Pendapatan Harian"><i class="fas fa-plus-square"></i></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="pendapatan1.php" data-toggle="tooltip" title="Pendapatan Bulanan"><i class="fas fa-medkit"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="tanammasuk.php" data-toggle="tooltip" title="Data Barang Masuk"><i class="fas fa-inbox"></i></a>
+            <a class="nav-link" href="grafik1.php" data-toggle="tooltip" title="Grafik Statistik Penjualan"><i class="fas fa-plus-square"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="grafik2.php" data-toggle="tooltip" title="Grafik Pendapatan Bulanan"><i class="fas fa-file-invoice-dollar"></i></a>
           </li>
         </ul>
       </div>

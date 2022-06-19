@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 14, 2022 at 04:01 AM
+-- Generation Time: Jun 19, 2022 at 02:20 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -47,8 +47,9 @@ CREATE TABLE `beli` (
 
 INSERT INTO `beli` (`idbeli`, `id`, `idongkir`, `tglbeli`, `total`, `bukti`, `status`, `namakota`, `tarifnya`, `alamat`) VALUES
 (43, 4, 8, '2022-06-13', 367000, '1712kwitansi.png', 'Diterima', 'Martapura', 17000, 'Jl. Bunga Melati kota Banjarbaru'),
-(44, 6, 3, '2022-06-13', 75000, '6846IMG.20211125.WA0000.jpg', 'Diterima', 'Barabai', 5000, 'Jl. Trikora Rt.32 Rw.5 Kode Pos 70721 Guntung Manggis'),
-(45, 3, 6, '2022-06-13', 1424000, '5258IMG.20210815.WA0023.jpg', 'Diterima', 'Marabahan', 25000, 'Gang Hijrah Raya, Muhibbin 4 Sekumpul');
+(44, 6, 3, '2022-06-14', 75000, '6846IMG.20211125.WA0000.jpg', 'Diterima', 'Barabai', 5000, 'Jl. Trikora Rt.32 Rw.5 Kode Pos 70721 Guntung Manggis'),
+(45, 3, 6, '2022-06-15', 1424000, '5258IMG.20210815.WA0023.jpg', 'Diterima', 'Marabahan', 25000, 'Gang Hijrah Raya, Muhibbin 4 Sekumpul'),
+(46, 6, 12, '2022-05-31', 1399000, '5799IMG.20210910.WA0004.jpg', 'Diterima', 'COD', 0, 'Jl. Trikora Rt.32 Rw.5 Kode Pos 70721 Guntung Manggis');
 
 -- --------------------------------------------------------
 
@@ -73,7 +74,8 @@ CREATE TABLE `beliproduk` (
 INSERT INTO `beliproduk` (`idbeliproduk`, `idbeli`, `idtanam`, `jumlah`, `namanya`, `harganya`, `subharga`) VALUES
 (37, 43, 20, 5, 'Mouse Logitech', 70000, 350000),
 (38, 44, 20, 1, 'Mouse Logitech', 70000, 70000),
-(39, 45, 22, 1, 'VOYAGER68 Lightyear Edition CNC Alu South Facing Mechanical Keyboard - BAREBONES', 1399000, 1399000);
+(39, 45, 22, 1, 'VOYAGER68 Lightyear Edition CNC Alu South Facing Mechanical Keyboard - BAREBONES', 1399000, 1399000),
+(40, 46, 22, 1, 'VOYAGER68 Lightyear Edition CNC Alu South Facing Mechanical Keyboard - BAREBONES', 1399000, 1399000);
 
 --
 -- Triggers `beliproduk`
@@ -286,7 +288,7 @@ CREATE TABLE `tanam` (
 INSERT INTO `tanam` (`idtanam`, `namatanam`, `kategori`, `modal`, `harga`, `deskripsi`, `gambar`, `stok`, `terjual`) VALUES
 (20, 'Mouse Logitech', 'Mouse', 50000, 70000, 'dari taiwan', '9663mouse2.jpg', 51, 6),
 (21, 'NOVA Ultralight Wireless Gaming Mouse 2.4ghz by Press Play', 'Mouse', 250000, 300000, 'NOVA v2 Wireless Gaming Mouse. Semua stock sudah v2, tidak ada lagi yg v1.', '371316e4c1a4.fbee.430d.adab.1741de5e23df.jpg', 2, 0),
-(22, 'VOYAGER68 Lightyear Edition CNC Alu South Facing Mechanical Keyboard - BAREBONES', 'Keyboard', 900000, 1399000, 'Software bisa di download dari link di Instagram @pressplayid.', '71185ce1faa0.96c5.4dd8.ae84.b82965c73fc1.jpg', 4, 1),
+(22, 'VOYAGER68 Lightyear Edition CNC Alu South Facing Mechanical Keyboard - BAREBONES', 'Keyboard', 900000, 1399000, 'Software bisa di download dari link di Instagram @pressplayid.', '71185ce1faa0.96c5.4dd8.ae84.b82965c73fc1.jpg', 3, 2),
 (23, 'Type C Coiled Cable Mechanical Keyboard Aviator by Press Play - GRAPHITE, V1', 'Keyboard', 250000, 349000, 'Specs:\r\n- Reverse Coiled\r\n- Double Sleeved with Techflex mesh\r\n- Total length +/- 1.6m', '43083e412be2.9a1c.48c8.9af6.59c3e1168fbc.jpg', 3, 0);
 
 -- --------------------------------------------------------
@@ -496,13 +498,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `beli`
 --
 ALTER TABLE `beli`
-  MODIFY `idbeli` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `idbeli` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `beliproduk`
 --
 ALTER TABLE `beliproduk`
-  MODIFY `idbeliproduk` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `idbeliproduk` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `detail`

@@ -137,5 +137,56 @@
         </div> <!-- /.row -->
       </div> <!-- /.container-fluid -->
     </section> <!-- /.content -->
+
+
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h2 style="display:inline;">Pendapatan Harian</h2>
+                <button style="float: right" class="btn btn-dark" type="button" data-toggle="modal" data-target="#modal-sm" title="Cetak"><i class="fas fa-file-pdf"></i></button>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="dataTables" class="table table-bordered table-hover table-sm">
+                  <thead class="table-dark">
+                    <tr class="text-center">
+                        <th>No</th>
+                        <th>Hari</th>
+                        <th>Transaksi Penjualan</th>
+                        <th>Transaksi Service</th>
+                        <th>Laba Kotor</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php 
+                      $no = 1;
+                      $query = mysqli_query($kon, "SELECT tglbeli, DATE(tglbeli) as hari FROM beli GROUP BY hari ORDER BY hari ASC");
+                      while($data = mysqli_fetch_array($query)){
+                        $hari = $data['hari'];
+                        $pendapatan1 = mysqli_fetch_array(mysqli_query($kon, "SELECT level, SUM(total) as total FROM beli INNER JOIN user ON beli.id = user.id WHERE DATE(tglbeli) = '$hari'"));
+                        $pendapatan2 = mysqli_fetch_array(mysqli_query($kon, "SELECT level, SUM(total) as total FROM transaksi JOIN user ON transaksi.id = user.id WHERE DATE(tgl) = '$hari'"));
+                        ?>
+                          <tr class="text-center">
+                          <td><?= $no++ ?></td> 
+                          <td><?= tgl_indo($hari) ?></td>
+                          <td>Rp. <?= number_format($pendapatan1['total'],0,'.','.') ?></td>
+                          <td>Rp. <?= number_format($pendapatan2['total'],0,'.','.') ?></td>
+                          <td>Rp. <?= number_format($pendapatan1['total']+$pendapatan2['total'],0,'.','.') ?></td>
+                        <?php 
+                      }
+                    ?>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+              <hr>
+            </div> <!-- /.card -->
+          </div> <!-- /.col -->
+        </div> <!-- /.row -->
+      </div> <!-- /.container-fluid -->
+    </section> <!-- /.content -->
   </div> <!-- /.content-wrapper -->
 <?php require('footernya.php') ?>

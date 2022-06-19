@@ -24,10 +24,11 @@ Fitur Website :
 	2. Transaksi Barang
 	3. Transaksi Service (NEW)
 	4. Pengiriman
-	5. Pendapatan Harian 
-	6. Pendapatan Bulanan
-	7. Nota Pembayaran
-	(NEW) 8. Favorit
+	5. Pendapatan Harian Pendapatan Bulanan
+	6. Nota Pembayaran
+	7. Favorit
+	8. (NEW) Grafik Pendapatan Bulanan
+	9. (NEW) Barang Diskon
 7. Alert Standar
 8. CRUD Standar
 9. Grafik (Tersedia)

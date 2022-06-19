@@ -27,8 +27,8 @@ Fitur Website :
 	5. Pendapatan Harian Pendapatan Bulanan
 	6. Nota Pembayaran
 	7. Favorit
-	8. (NEW) Grafik Pendapatan Bulanan
-	9. (NEW) Barang Diskon
+	8. (NEW) Grafik Statistik Penjualan Terlaris
+	9. (NEW) Grafik Pendapatan Bulanan
 7. Alert Standar
 8. CRUD Standar
 9. Grafik (Tersedia)

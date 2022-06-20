@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 19, 2022 at 02:20 PM
+-- Generation Time: Jun 20, 2022 at 02:47 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -286,7 +286,7 @@ CREATE TABLE `tanam` (
 --
 
 INSERT INTO `tanam` (`idtanam`, `namatanam`, `kategori`, `modal`, `harga`, `deskripsi`, `gambar`, `stok`, `terjual`) VALUES
-(20, 'Mouse Logitech', 'Mouse', 50000, 70000, 'dari taiwan', '9663mouse2.jpg', 51, 6),
+(20, 'Mouse Logitech', 'Mouse', 50000, 70000, 'dari taiwan', '9663mouse2.jpg', 50, 6),
 (21, 'NOVA Ultralight Wireless Gaming Mouse 2.4ghz by Press Play', 'Mouse', 250000, 300000, 'NOVA v2 Wireless Gaming Mouse. Semua stock sudah v2, tidak ada lagi yg v1.', '371316e4c1a4.fbee.430d.adab.1741de5e23df.jpg', 2, 0),
 (22, 'VOYAGER68 Lightyear Edition CNC Alu South Facing Mechanical Keyboard - BAREBONES', 'Keyboard', 900000, 1399000, 'Software bisa di download dari link di Instagram @pressplayid.', '71185ce1faa0.96c5.4dd8.ae84.b82965c73fc1.jpg', 3, 2),
 (23, 'Type C Coiled Cable Mechanical Keyboard Aviator by Press Play - GRAPHITE, V1', 'Keyboard', 250000, 349000, 'Specs:\r\n- Reverse Coiled\r\n- Double Sleeved with Techflex mesh\r\n- Total length +/- 1.6m', '43083e412be2.9a1c.48c8.9af6.59c3e1168fbc.jpg', 3, 0);
@@ -338,6 +338,53 @@ DELIMITER $$
 CREATE TRIGGER `update_masuk` AFTER UPDATE ON `tanammasuk` FOR EACH ROW BEGIN
 	UPDATE tanam SET stok = stok - OLD.jumlah, 
                      stok = stok + NEW.jumlah 
+    WHERE idtanam = NEW.idtanam;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tanamrusak`
+--
+
+CREATE TABLE `tanamrusak` (
+  `idtanamrusak` int(5) NOT NULL,
+  `idtanam` int(5) NOT NULL,
+  `tgl` date NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `catatan` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tanamrusak`
+--
+
+INSERT INTO `tanamrusak` (`idtanamrusak`, `idtanam`, `tgl`, `jumlah`, `catatan`) VALUES
+(2, 20, '2022-06-20', 1, 'switch on/off tidak berfungsi.');
+
+--
+-- Triggers `tanamrusak`
+--
+DELIMITER $$
+CREATE TRIGGER `gaRusak` AFTER DELETE ON `tanamrusak` FOR EACH ROW BEGIN 
+	UPDATE tanam SET stok = stok + OLD.jumlah
+    WHERE idtanam = OLD.idtanam;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `jadiRusak` AFTER INSERT ON `tanamrusak` FOR EACH ROW BEGIN 
+	UPDATE tanam SET stok = stok - NEW.jumlah
+    WHERE idtanam = NEW.idtanam;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `ubahRusak` AFTER UPDATE ON `tanamrusak` FOR EACH ROW BEGIN
+	UPDATE tanam SET stok = stok + OLD.jumlah, 
+                     stok = stok - NEW.jumlah 
     WHERE idtanam = NEW.idtanam;
 END
 $$
@@ -478,6 +525,13 @@ ALTER TABLE `tanammasuk`
   ADD KEY `idtanam` (`idtanam`);
 
 --
+-- Indexes for table `tanamrusak`
+--
+ALTER TABLE `tanamrusak`
+  ADD PRIMARY KEY (`idtanamrusak`),
+  ADD KEY `idtanam` (`idtanam`);
+
+--
 -- Indexes for table `transaksi`
 --
 ALTER TABLE `transaksi`
@@ -561,6 +615,12 @@ ALTER TABLE `tanammasuk`
   MODIFY `idtanammasuk` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
+-- AUTO_INCREMENT for table `tanamrusak`
+--
+ALTER TABLE `tanamrusak`
+  MODIFY `idtanamrusak` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
@@ -588,6 +648,12 @@ ALTER TABLE `detail`
 ALTER TABLE `favorit`
   ADD CONSTRAINT `favorit_ibfk_1` FOREIGN KEY (`id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `favorit_ibfk_2` FOREIGN KEY (`idtanam`) REFERENCES `tanam` (`idtanam`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tanamrusak`
+--
+ALTER TABLE `tanamrusak`
+  ADD CONSTRAINT `tanamrusak_ibfk_1` FOREIGN KEY (`idtanam`) REFERENCES `tanam` (`idtanam`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `transaksi`

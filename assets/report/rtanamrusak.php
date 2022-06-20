@@ -5,19 +5,19 @@ require "../../tgl_indo.php";
 	$tahun 		= $_REQUEST['tahun'];
 
 	if($bulan AND $tahun ){
-		$result = mysqli_query($kon, "SELECT * FROM tanammasuk INNER JOIN tanam ON tanammasuk.idtanam = tanam.idtanam WHERE MONTH(tgl) = '$bulan' AND YEAR(tgl) = '$tahun' ORDER BY tgl ASC");
+		$result = mysqli_query($kon, "SELECT * FROM tanamrusak INNER JOIN tanam ON tanamrusak.idtanam = tanam.idtanam WHERE MONTH(tgl) = '$bulan' AND YEAR(tgl) = '$tahun' ORDER BY tgl ASC");
 	}else{
-		$result = mysqli_query($kon, "SELECT * FROM tanammasuk INNER JOIN tanam ON tanammasuk.idtanam = tanam.idtanam ORDER BY tgl ASC");
+		$result = mysqli_query($kon, "SELECT * FROM tanamrusak INNER JOIN tanam ON tanamrusak.idtanam = tanam.idtanam ORDER BY tgl ASC");
 	}
 
 	if(mysqli_num_rows($result)==0){
-		?> <script>alert('Data Tidak Ditemukan');window.location='../../laman/tanammasuk.php';</script> <?php
+		?> <script>alert('Data Tidak Ditemukan');window.location='../../laman/tanamrusak.php';</script> <?php
 	}
 
 	require('kepala.php');
 ?>
 <style type="text/css" media="print"> @page { size: landscape; } </style>
-<h3 style="text-align: center;">Laporan Barang Masuk</h3>
+<h3 style="text-align: center;">Laporan Barang Rusak</h3>
 <h5 class="text-center">
 	<?php 
 	if($bulan AND $tahun){
@@ -32,8 +32,6 @@ require "../../tgl_indo.php";
         <th>No</th>
         <th>Tanggal</th>
         <th>Nama Barang</th>
-        <th>Distributor</th>
-        <th>Harga</th>
         <th>Jumlah</th>
         <th>Catatan</th>
       </tr>
@@ -45,8 +43,6 @@ while( $data = mysqli_fetch_array($result) ) : ?>
   	<td><?= $i++; ?></td>
   	<td><?= haribulantahun($data['tgl'],true)?></td>          
 	  <td><?= $data['namatanam'] ?></td> 
-	  <td><?= $data['sumber'] ?></td>
-    <td>Rp. <?= number_format($data['hargamasuk'],0,',','.') ?> </td>                  
 	  <td><?= $data['jumlah'] ?></td>
 	  <td><?= $data['catatan'] ?></td>
 </tr>

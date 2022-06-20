@@ -84,7 +84,10 @@
           
           <li class="nav-item text-white"> <a class="nav-link" href="#">|</a> </li>
           <li class="nav-item">
-            <a class="nav-link" href="tanammasuk.php" data-toggle="tooltip" title="Data Barang Masuk"><i class="fas fa-inbox"></i></a>
+            <a class="nav-link" href="tanammasuk.php" data-toggle="tooltip" title="Barang Masuk"><i class="fas fa-inbox"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="tanamrusak.php" data-toggle="tooltip" title="Barang Rusak"><i class="fas fa-file"></i></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="favorit.php" data-toggle="tooltip" title="Favorit"><i class="fas fa-star"></i></a>

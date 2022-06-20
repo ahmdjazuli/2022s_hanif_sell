@@ -19,16 +19,17 @@ Fitur Website :
 3. Multi User (Admin, Kurir dan Pelanggan) (3)
 4. Halaman Utama (Belanja, Troli, Checkout, Login)
 5. Data Master terdiri dari : Data Pengguna, Kurir, Service (NEW), Ongkir, Biaya Pengeluaran dan Barang. (6)
-6. Data Report terdiri dari (7) : 
+6. Data Report terdiri dari (10) : 
 	1. Barang Masuk
 	2. Transaksi Barang
 	3. Transaksi Service (NEW)
 	4. Pengiriman
 	5. Pendapatan Harian Pendapatan Bulanan
 	6. Nota Pembayaran
-	7. Favorit
+	7. (NEW) Favorit
 	8. (NEW) Grafik Statistik Penjualan Terlaris
 	9. (NEW) Grafik Pendapatan Bulanan
+	10. (NEW) Barang Rusak
 7. Alert Standar
 8. CRUD Standar
 9. Grafik (Tersedia)

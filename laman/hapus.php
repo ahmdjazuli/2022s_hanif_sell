@@ -58,5 +58,9 @@
 		unlink('../'.$data['foto']);
 		mysqli_query($kon, "DELETE FROM kirim WHERE idkirim='$_REQUEST[idkirim]'"); 
 		?><script>window.location='kirim.php'</script><?php
+	}else if (isset($_GET['idtanamrusak'])) {
+		mysqli_query($kon, "DELETE FROM tanamrusak WHERE idtanamrusak='$_REQUEST[idtanamrusak]'"); 
+		?><script>window.location='tanamrusak.php'</script><?php
+	// beli
 	}
 ?>

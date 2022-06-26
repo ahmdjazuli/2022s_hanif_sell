@@ -13,6 +13,9 @@ Bahasa Pemograman :
 2. Javascript
 3. CSS
 
+PEMBAHARUAN :
+1. Sudah ditambakan data supplier dan berelasi ke barang masuk.
+
 Fitur Website :
 1. Template Scorilo (Coklat Putih)
 2. Template Admin LTE 3.0 (Navbar Top) 

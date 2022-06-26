@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2022 at 02:47 AM
+-- Generation Time: Jun 26, 2022 at 01:37 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -266,6 +266,29 @@ INSERT INTO `service` (`idservice`, `nservice`, `ket`, `total`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `supplier`
+--
+
+CREATE TABLE `supplier` (
+  `idsupplier` int(5) NOT NULL,
+  `nsupplier` varchar(100) NOT NULL,
+  `alamat` text NOT NULL,
+  `telp` varchar(15) NOT NULL,
+  `email` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `supplier`
+--
+
+INSERT INTO `supplier` (`idsupplier`, `nsupplier`, `alamat`, `telp`, `email`) VALUES
+(1, 'Press Play ID', 'Daerah Khusus Ibukota Jakarta 14350', '082144219522', 'pressplayindonesia@gmail.com'),
+(3, 'Sanken', 'Jl. Brigjen H Hasan Basri No. 5A RT 12 Kel. Alalak, Kota Banjarmasin, Kalimantan Selatan 70123', '085959993300', 'sankenbjm@yahoo.co.id'),
+(4, 'PT. Visindo Global Teknologi', 'Jl. Gunung Sahari Raya No. 1 Jakarta Utara', '02162302085', 'vinsen_7783@yahoo.com');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tanam`
 --
 
@@ -300,10 +323,10 @@ INSERT INTO `tanam` (`idtanam`, `namatanam`, `kategori`, `modal`, `harga`, `desk
 CREATE TABLE `tanammasuk` (
   `idtanammasuk` int(5) NOT NULL,
   `idtanam` int(5) NOT NULL,
+  `idsupplier` int(5) NOT NULL,
   `tgl` date NOT NULL,
   `jumlah` int(5) NOT NULL,
   `hargamasuk` float NOT NULL,
-  `sumber` varchar(80) NOT NULL,
   `catatan` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -311,11 +334,11 @@ CREATE TABLE `tanammasuk` (
 -- Dumping data for table `tanammasuk`
 --
 
-INSERT INTO `tanammasuk` (`idtanammasuk`, `idtanam`, `tgl`, `jumlah`, `hargamasuk`, `sumber`, `catatan`) VALUES
-(23, 20, '2022-06-09', 2, 50000, 'sunken', 'warna hitam'),
-(24, 20, '2022-06-11', 1, 50000, 'sunken', 'varian putih'),
-(25, 21, '2022-06-13', 2, 250000, 'Pressplay', 'versi 1'),
-(26, 23, '2022-06-12', 3, 250000, 'Pressplay', 'varian graphite, flux dan rust');
+INSERT INTO `tanammasuk` (`idtanammasuk`, `idtanam`, `idsupplier`, `tgl`, `jumlah`, `hargamasuk`, `catatan`) VALUES
+(23, 20, 3, '2022-06-09', 2, 50000, 'warna hitam'),
+(24, 20, 3, '2022-06-11', 1, 50000, 'varian putih'),
+(25, 21, 1, '2022-06-13', 2, 250000, 'versi 1'),
+(26, 23, 1, '2022-06-12', 3, 250000, 'varian graphite, flux dan rust');
 
 --
 -- Triggers `tanammasuk`
@@ -512,6 +535,12 @@ ALTER TABLE `service`
   ADD PRIMARY KEY (`idservice`);
 
 --
+-- Indexes for table `supplier`
+--
+ALTER TABLE `supplier`
+  ADD PRIMARY KEY (`idsupplier`);
+
+--
 -- Indexes for table `tanam`
 --
 ALTER TABLE `tanam`
@@ -522,7 +551,8 @@ ALTER TABLE `tanam`
 --
 ALTER TABLE `tanammasuk`
   ADD PRIMARY KEY (`idtanammasuk`),
-  ADD KEY `idtanam` (`idtanam`);
+  ADD KEY `idtanam` (`idtanam`),
+  ADD KEY `idsupplier` (`idsupplier`);
 
 --
 -- Indexes for table `tanamrusak`
@@ -603,6 +633,12 @@ ALTER TABLE `service`
   MODIFY `idservice` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `supplier`
+--
+ALTER TABLE `supplier`
+  MODIFY `idsupplier` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `tanam`
 --
 ALTER TABLE `tanam`
@@ -612,7 +648,7 @@ ALTER TABLE `tanam`
 -- AUTO_INCREMENT for table `tanammasuk`
 --
 ALTER TABLE `tanammasuk`
-  MODIFY `idtanammasuk` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `idtanammasuk` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `tanamrusak`
@@ -648,6 +684,13 @@ ALTER TABLE `detail`
 ALTER TABLE `favorit`
   ADD CONSTRAINT `favorit_ibfk_1` FOREIGN KEY (`id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `favorit_ibfk_2` FOREIGN KEY (`idtanam`) REFERENCES `tanam` (`idtanam`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `tanammasuk`
+--
+ALTER TABLE `tanammasuk`
+  ADD CONSTRAINT `tanammasuk_ibfk_1` FOREIGN KEY (`idsupplier`) REFERENCES `supplier` (`idsupplier`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tanammasuk_ibfk_2` FOREIGN KEY (`idtanam`) REFERENCES `tanam` (`idtanam`);
 
 --
 -- Constraints for table `tanamrusak`

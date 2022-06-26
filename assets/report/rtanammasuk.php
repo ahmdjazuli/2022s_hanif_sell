@@ -5,9 +5,9 @@ require "../../tgl_indo.php";
 	$tahun 		= $_REQUEST['tahun'];
 
 	if($bulan AND $tahun ){
-		$result = mysqli_query($kon, "SELECT * FROM tanammasuk INNER JOIN tanam ON tanammasuk.idtanam = tanam.idtanam WHERE MONTH(tgl) = '$bulan' AND YEAR(tgl) = '$tahun' ORDER BY tgl ASC");
+		$result = mysqli_query($kon, "SELECT * FROM tanammasuk INNER JOIN tanam ON tanammasuk.idtanam = tanam.idtanam INNER JOIN supplier ON tanammasuk.idsupplier = supplier.idsupplier WHERE MONTH(tgl) = '$bulan' AND YEAR(tgl) = '$tahun' ORDER BY tgl ASC");
 	}else{
-		$result = mysqli_query($kon, "SELECT * FROM tanammasuk INNER JOIN tanam ON tanammasuk.idtanam = tanam.idtanam ORDER BY tgl ASC");
+		$result = mysqli_query($kon, "SELECT * FROM tanammasuk INNER JOIN tanam ON tanammasuk.idtanam = tanam.idtanam INNER JOIN supplier ON tanammasuk.idsupplier = supplier.idsupplier ORDER BY tgl ASC");
 	}
 
 	if(mysqli_num_rows($result)==0){
@@ -32,7 +32,7 @@ require "../../tgl_indo.php";
         <th>No</th>
         <th>Tanggal</th>
         <th>Nama Barang</th>
-        <th>Distributor</th>
+        <th>Supplier</th>
         <th>Harga</th>
         <th>Jumlah</th>
         <th>Catatan</th>
@@ -45,7 +45,7 @@ while( $data = mysqli_fetch_array($result) ) : ?>
   	<td><?= $i++; ?></td>
   	<td><?= haribulantahun($data['tgl'],true)?></td>          
 	  <td><?= $data['namatanam'] ?></td> 
-	  <td><?= $data['sumber'] ?></td>
+	  <td><?= $data['nsupplier'] ?></td>
     <td>Rp. <?= number_format($data['hargamasuk'],0,',','.') ?> </td>                  
 	  <td><?= $data['jumlah'] ?></td>
 	  <td><?= $data['catatan'] ?></td>

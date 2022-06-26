@@ -12,7 +12,7 @@
           <div class="col-md-6 col-sm-12">
             <div class="card">
               <div class="card-header">
-                <h2 style="display:inline;"><button class="btn btn-default" type="button" data-toggle="tooltip" data-placement="bottom" title="Ubah"><i class="fas fa-edit"></i></button> Data Ongkir</h2>
+                <h2 style="display:inline;"><button class="btn btn-default" type="button" data-toggle="tooltip" data-placement="bottom" title="Ubah"><i class="fas fa-edit"></i></button> Data Service</h2>
               </div>
               <!-- /.card-header -->
               <div class="card-body">

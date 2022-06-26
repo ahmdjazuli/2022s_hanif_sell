@@ -61,6 +61,9 @@
 	}else if (isset($_GET['idtanamrusak'])) {
 		mysqli_query($kon, "DELETE FROM tanamrusak WHERE idtanamrusak='$_REQUEST[idtanamrusak]'"); 
 		?><script>window.location='tanamrusak.php'</script><?php
-	// beli
+	// supplier
+	}else if (isset($_GET['idsupplier'])) {
+		mysqli_query($kon, "DELETE FROM supplier WHERE idsupplier='$_REQUEST[idsupplier]'"); 
+		?><script>window.location='supplier.php'</script><?php
 	}
 ?>

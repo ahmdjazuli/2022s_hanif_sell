@@ -67,6 +67,9 @@
             <a class="nav-link" href="tanam.php" data-toggle="tooltip" title="Data Barang"><i class="fas fa-laptop-code"></i></a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="supplier.php" data-toggle="tooltip" title="Data Supplier"><i class="fas fa-toolbox"></i></a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="service.php" data-toggle="tooltip" title="Data Service"><i class="fab fa-servicestack"></i></a>
           </li>
           <li class="nav-item">

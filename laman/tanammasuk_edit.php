@@ -27,18 +27,6 @@
                     <input type="text" class="form-control" value="<?= $data['namatanam'].' (Rp. '.$data['hargamasuk'].')' ?>" readonly>
                   </div>
                   <div class="form-group">
-                    <label>Nama Supplier</label>
-                    <select name="idsupplier" class="form-control" required>
-                      <option value="<?= $data['idsupplier'] ?>"><?= $data['nsupplier'] ?></option>
-                    <?php
-                      $okelah = mysqli_query($kon, "SELECT * FROM supplier ORDER BY nsupplier ASC");
-                        while($bisa = mysqli_fetch_array($okelah)) {
-                          echo "<option value='$bisa[idsupplier]'>$bisa[nsupplier]</option>";
-                        } 
-                      ?>
-                  </select>
-                  </div>
-                  <div class="form-group">
                     <label>Jumlah</label>
                     <input type="number" class="form-control" name="jumlah" value="<?= $data['jumlah'] ?>">
                   </div>
@@ -65,9 +53,8 @@
     $jumlah    = $_REQUEST['jumlah'];
     $tgl    = $_REQUEST['tgl'];
     $catatan    = $_REQUEST['catatan'];
-    $idsupplier    = $_REQUEST['idsupplier'];
 
-    $ubah = mysqli_query($kon,"UPDATE tanammasuk SET jumlah='$jumlah', tgl='$tgl', catatan = '$catatan', idsupplier = '$idsupplier' WHERE idtanammasuk = '$idtanammasuk'");
+    $ubah = mysqli_query($kon,"UPDATE tanammasuk SET jumlah='$jumlah', tgl='$tgl', catatan = '$catatan' WHERE idtanammasuk = '$idtanammasuk'");
     if($ubah){
       ?> <script>alert('Berhasil Diperbaharui');window.location='tanammasuk.php';</script> <?php
     }else{

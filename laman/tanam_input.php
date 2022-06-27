@@ -72,6 +72,18 @@
                     <textarea class="form-control" name="deskripsi" rows="4"></textarea>
                   </div>
                   <div class="form-group">
+                    <label>Nama Supplier</label>
+                    <select name="idsupplier" class="form-control" required>
+                      <option value="">-Pilih-</option>
+                    <?php
+                      $okelah = mysqli_query($kon, "SELECT * FROM supplier ORDER BY nsupplier ASC");
+                        while($bisa = mysqli_fetch_array($okelah)) {
+                          echo "<option value='$bisa[idsupplier]'>$bisa[nsupplier]</option>";
+                        } 
+                      ?>
+                  </select>
+                  </div>
+                  <div class="form-group">
                     <label>Gambar</label>
                     <input type="file" class="form-control" name="gambar">
                   </div>
@@ -97,6 +109,7 @@
     $modal     = $_REQUEST['modal'];
     $harga     = $_REQUEST['harga'];
     $deskripsi = $_REQUEST['deskripsi'];
+    $idsupplier = $_REQUEST['idsupplier'];
 
     $ekstensi_diperbolehkan = array('png','jpg','jpeg');
     $namafoto               = $_FILES['gambar']['name'];
@@ -110,7 +123,7 @@
         $namabaru = rand(1000,9999).preg_replace("/[^a-zA-Z0-9]/", ".", $namafoto);   
         move_uploaded_file($file_tmp, '../img/'.$namabaru);
         
-        $hasil = mysqli_query($kon,"INSERT INTO tanam (namatanam, kategori, modal, harga, deskripsi, gambar) VALUES ('$namatanam','$kategori','$modal','$harga','$deskripsi','$namabaru')");
+        $hasil = mysqli_query($kon,"INSERT INTO tanam (idsupplier,namatanam, kategori, modal, harga, deskripsi, gambar) VALUES ('$idsupplier','$namatanam','$kategori','$modal','$harga','$deskripsi','$namabaru')");
 
         if($hasil){
           ?> <script>alert('Berhasil Disimpan!'); window.location = 'tanam.php';</script><?php

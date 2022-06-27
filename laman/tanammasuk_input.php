@@ -33,18 +33,6 @@
                   </select>
                   </div>
                   <div class="form-group">
-                    <label>Nama Supplier</label>
-                    <select name="idsupplier" class="form-control" required>
-                      <option value="">-Pilih-</option>
-                    <?php
-                      $okelah = mysqli_query($kon, "SELECT * FROM supplier ORDER BY nsupplier ASC");
-                        while($bisa = mysqli_fetch_array($okelah)) {
-                          echo "<option value='$bisa[idsupplier]'>$bisa[nsupplier]</option>";
-                        } 
-                      ?>
-                  </select>
-                  </div>
-                  <div class="form-group">
                     <label>Harga</label>
                     <input type="number" class="form-control" id="hargamasuk" name="hargamasuk" readonly name="hargamasuk">
                   </div>
@@ -78,9 +66,8 @@
     $jumlah = $_REQUEST['jumlah'];
     $catatan = $_REQUEST['catatan'];
     $hargamasuk = $_REQUEST['hargamasuk'];
-    $idsupplier = $_REQUEST['idsupplier'];
 
-      $tambah = mysqli_query($kon,"INSERT INTO tanammasuk(tgl, jumlah, idtanam, catatan, hargamasuk, idsupplier) VALUES ('$tgl','$jumlah','$idtanam','$catatan','$hargamasuk','$idsupplier')");
+      $tambah = mysqli_query($kon,"INSERT INTO tanammasuk(tgl, jumlah, idtanam, catatan, hargamasuk) VALUES ('$tgl','$jumlah','$idtanam','$catatan','$hargamasuk')");
       if($tambah){
         ?> <script>alert('Berhasil Disimpan');window.location='tanammasuk.php';</script> <?php
       }else{

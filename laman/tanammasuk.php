@@ -85,7 +85,6 @@
                         <th>No</th>
                         <th>Tanggal</th>
                         <th>Nama Barang</th>
-                        <th>Supplier</th>
                         <th>Harga</th>
                         <th>Jumlah</th>
                         <th>Catatan</th>
@@ -95,14 +94,13 @@
                   <tbody>
                     <?php 
                       $no = 1;
-                      $query = mysqli_query($kon, "SELECT * FROM tanammasuk INNER JOIN tanam ON tanammasuk.idtanam = tanam.idtanam INNER JOIN supplier ON tanammasuk.idsupplier = supplier.idsupplier ORDER BY tgl DESC");
+                      $query = mysqli_query($kon, "SELECT * FROM tanammasuk INNER JOIN tanam ON tanammasuk.idtanam = tanam.idtanam ORDER BY tgl DESC");
                       while($data = mysqli_fetch_array($query)){
                         ?>
                           <tr class="text-center">
                           <td><?= $no++ ?></td>        
                           <td><?= haribulantahun($data['tgl'],true)?></td>             
                           <td><?= $data['namatanam'] ?></td>
-                          <td><?= $data['nsupplier'] ?></td>
                           <td>Rp. <?= number_format($data['hargamasuk'],0,',','.') ?> </td>
                           <td><?= $data['jumlah'] ?></td>
                           <td><?= $data['catatan'] ?></td>

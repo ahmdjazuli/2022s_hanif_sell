@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 26, 2022 at 01:37 PM
+-- Generation Time: Jun 27, 2022 at 01:55 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -294,6 +294,7 @@ INSERT INTO `supplier` (`idsupplier`, `nsupplier`, `alamat`, `telp`, `email`) VA
 
 CREATE TABLE `tanam` (
   `idtanam` int(5) NOT NULL,
+  `idsupplier` int(5) NOT NULL,
   `namatanam` varchar(80) NOT NULL,
   `kategori` varchar(30) NOT NULL,
   `modal` float NOT NULL,
@@ -308,11 +309,11 @@ CREATE TABLE `tanam` (
 -- Dumping data for table `tanam`
 --
 
-INSERT INTO `tanam` (`idtanam`, `namatanam`, `kategori`, `modal`, `harga`, `deskripsi`, `gambar`, `stok`, `terjual`) VALUES
-(20, 'Mouse Logitech', 'Mouse', 50000, 70000, 'dari taiwan', '9663mouse2.jpg', 50, 6),
-(21, 'NOVA Ultralight Wireless Gaming Mouse 2.4ghz by Press Play', 'Mouse', 250000, 300000, 'NOVA v2 Wireless Gaming Mouse. Semua stock sudah v2, tidak ada lagi yg v1.', '371316e4c1a4.fbee.430d.adab.1741de5e23df.jpg', 2, 0),
-(22, 'VOYAGER68 Lightyear Edition CNC Alu South Facing Mechanical Keyboard - BAREBONES', 'Keyboard', 900000, 1399000, 'Software bisa di download dari link di Instagram @pressplayid.', '71185ce1faa0.96c5.4dd8.ae84.b82965c73fc1.jpg', 3, 2),
-(23, 'Type C Coiled Cable Mechanical Keyboard Aviator by Press Play - GRAPHITE, V1', 'Keyboard', 250000, 349000, 'Specs:\r\n- Reverse Coiled\r\n- Double Sleeved with Techflex mesh\r\n- Total length +/- 1.6m', '43083e412be2.9a1c.48c8.9af6.59c3e1168fbc.jpg', 3, 0);
+INSERT INTO `tanam` (`idtanam`, `idsupplier`, `namatanam`, `kategori`, `modal`, `harga`, `deskripsi`, `gambar`, `stok`, `terjual`) VALUES
+(20, 4, 'Mouse Logitech', 'Mouse', 50000, 70000, 'dari taiwan', '9663mouse2.jpg', 50, 6),
+(21, 1, 'NOVA Ultralight Wireless Gaming Mouse 2.4ghz by Press Play', 'Mouse', 250000, 300000, 'NOVA v2 Wireless Gaming Mouse. Semua stock sudah v2, tidak ada lagi yg v1.', '371316e4c1a4.fbee.430d.adab.1741de5e23df.jpg', 2, 0),
+(22, 1, 'VOYAGER68 Lightyear Edition CNC Alu South Facing Mechanical Keyboard - BAREBONES', 'Keyboard', 900000, 1399000, 'Software bisa di download dari link di Instagram @pressplayid.', '71185ce1faa0.96c5.4dd8.ae84.b82965c73fc1.jpg', 3, 2),
+(23, 3, 'Type C Coiled Cable Mechanical Keyboard Aviator by Press Play - GRAPHITE, V1', 'Keyboard', 250000, 349000, 'Specs:\r\n- Reverse Coiled\r\n- Double Sleeved with Techflex mesh\r\n- Total length +/- 1.6m', '43083e412be2.9a1c.48c8.9af6.59c3e1168fbc.jpg', 3, 0);
 
 -- --------------------------------------------------------
 
@@ -323,7 +324,6 @@ INSERT INTO `tanam` (`idtanam`, `namatanam`, `kategori`, `modal`, `harga`, `desk
 CREATE TABLE `tanammasuk` (
   `idtanammasuk` int(5) NOT NULL,
   `idtanam` int(5) NOT NULL,
-  `idsupplier` int(5) NOT NULL,
   `tgl` date NOT NULL,
   `jumlah` int(5) NOT NULL,
   `hargamasuk` float NOT NULL,
@@ -334,11 +334,11 @@ CREATE TABLE `tanammasuk` (
 -- Dumping data for table `tanammasuk`
 --
 
-INSERT INTO `tanammasuk` (`idtanammasuk`, `idtanam`, `idsupplier`, `tgl`, `jumlah`, `hargamasuk`, `catatan`) VALUES
-(23, 20, 3, '2022-06-09', 2, 50000, 'warna hitam'),
-(24, 20, 3, '2022-06-11', 1, 50000, 'varian putih'),
-(25, 21, 1, '2022-06-13', 2, 250000, 'versi 1'),
-(26, 23, 1, '2022-06-12', 3, 250000, 'varian graphite, flux dan rust');
+INSERT INTO `tanammasuk` (`idtanammasuk`, `idtanam`, `tgl`, `jumlah`, `hargamasuk`, `catatan`) VALUES
+(23, 20, '2022-06-09', 2, 50000, 'warna hitam'),
+(24, 20, '2022-06-11', 1, 50000, 'varian putih'),
+(25, 21, '2022-06-13', 2, 250000, 'versi 1'),
+(26, 23, '2022-06-12', 3, 250000, 'varian graphite, flux dan rust');
 
 --
 -- Triggers `tanammasuk`
@@ -544,15 +544,15 @@ ALTER TABLE `supplier`
 -- Indexes for table `tanam`
 --
 ALTER TABLE `tanam`
-  ADD PRIMARY KEY (`idtanam`);
+  ADD PRIMARY KEY (`idtanam`),
+  ADD KEY `idsupplier` (`idsupplier`);
 
 --
 -- Indexes for table `tanammasuk`
 --
 ALTER TABLE `tanammasuk`
   ADD PRIMARY KEY (`idtanammasuk`),
-  ADD KEY `idtanam` (`idtanam`),
-  ADD KEY `idsupplier` (`idsupplier`);
+  ADD KEY `idtanam` (`idtanam`);
 
 --
 -- Indexes for table `tanamrusak`
@@ -648,7 +648,7 @@ ALTER TABLE `tanam`
 -- AUTO_INCREMENT for table `tanammasuk`
 --
 ALTER TABLE `tanammasuk`
-  MODIFY `idtanammasuk` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `idtanammasuk` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `tanamrusak`
@@ -686,10 +686,15 @@ ALTER TABLE `favorit`
   ADD CONSTRAINT `favorit_ibfk_2` FOREIGN KEY (`idtanam`) REFERENCES `tanam` (`idtanam`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `tanam`
+--
+ALTER TABLE `tanam`
+  ADD CONSTRAINT `tanam_ibfk_1` FOREIGN KEY (`idsupplier`) REFERENCES `supplier` (`idsupplier`);
+
+--
 -- Constraints for table `tanammasuk`
 --
 ALTER TABLE `tanammasuk`
-  ADD CONSTRAINT `tanammasuk_ibfk_1` FOREIGN KEY (`idsupplier`) REFERENCES `supplier` (`idsupplier`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tanammasuk_ibfk_2` FOREIGN KEY (`idtanam`) REFERENCES `tanam` (`idtanam`);
 
 --

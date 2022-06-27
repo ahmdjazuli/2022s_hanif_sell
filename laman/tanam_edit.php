@@ -1,6 +1,6 @@
 <?php require('headernya.php');
 	$idtanam = $_GET['idtanam'];
-	$query = mysqli_query($kon, "SELECT * FROM tanam WHERE idtanam = '$idtanam'");
+	$query = mysqli_query($kon, "SELECT * FROM tanam JOIN supplier ON tanam.idsupplier = supplier.idsupplier WHERE idtanam = '$idtanam'");
 	$data  = mysqli_fetch_array($query);
 ?>
  <!-- Content Wrapper. Contains page content -->
@@ -77,6 +77,18 @@
                     <textarea class="form-control" name="deskripsi" rows="4"><?= $data['deskripsi']?></textarea>
                   </div>
                   <div class="form-group">
+                    <label>Nama Supplier</label>
+                    <select name="idsupplier" class="form-control" required>
+                      <option value="<?= $data['idsupplier'] ?>"><?= $data['nsupplier'] ?></option>
+                    <?php
+                      $okelah = mysqli_query($kon, "SELECT * FROM supplier ORDER BY nsupplier ASC");
+                        while($bisa = mysqli_fetch_array($okelah)) {
+                          echo "<option value='$bisa[idsupplier]'>$bisa[nsupplier]</option>";
+                        } 
+                      ?>
+                  </select>
+                  </div>
+                  <div class="form-group">
                     <label>Ubah Gambar</label>
                     <input type="file" class="form-control" name="foto">
                     <input type="hidden" class="form-control" name="fotoLama" value="<?= $data['gambar']?>">
@@ -104,6 +116,7 @@
     $modal     = $_REQUEST['modal'];
     $deskripsi = $_REQUEST['deskripsi'];
     $harga     = $_REQUEST['harga'];
+    $idsupplier = $_REQUEST['idsupplier'];
 
     $ekstensi_diperbolehkan = array('png','jpg','jpeg');
     $namafoto               = $_FILES['foto']['name'];
@@ -115,7 +128,7 @@
     $fotoLama               = $_REQUEST['fotoLama'];
 
     if($foto){
-      $ubah = mysqli_query($kon,"UPDATE tanam SET modal='$modal', namatanam='$namatanam', deskripsi = '$deskripsi', harga = '$harga', gambar = '$fotoLama', kategori = '$kategori' WHERE idtanam = '$idtanam'");
+      $ubah = mysqli_query($kon,"UPDATE tanam SET modal='$modal', namatanam='$namatanam', deskripsi = '$deskripsi', harga = '$harga', gambar = '$fotoLama', kategori = '$kategori', idsupplier = '$idsupplier' WHERE idtanam = '$idtanam'");
       ?> <script>alert('Berhasil Diperbaharui, tanpa Mengubah Foto');window.location='tanam.php';</script> <?php
     }else{
       if(in_array($ekstensi, $ekstensi_diperbolehkan) === true){
@@ -123,7 +136,7 @@
           $namabaru = rand(1000,9999).preg_replace("/[^a-zA-Z0-9]/", ".", $namafoto);   
           move_uploaded_file($file_tmp, '../img/'.$namabaru);
           unlink("../img/".$fotoLama);
-          $ubah = mysqli_query($kon,"UPDATE tanam SET modal='$modal', namatanam='$namatanam', deskripsi = '$deskripsi', harga_r = '$harga_r', harga = '$harga', gambar = '$namabaru' WHERE idtanam = '$idtanam'");
+          $ubah = mysqli_query($kon,"UPDATE tanam SET modal='$modal', namatanam='$namatanam', deskripsi = '$deskripsi', harga_r = '$harga_r', harga = '$harga', idsupplier = '$idsupplier', gambar = '$namabaru' WHERE idtanam = '$idtanam'");
           
           if($ubah){
             ?> <script>alert('Berhasil Diperbaharui');window.location='tanam.php';</script> <?php

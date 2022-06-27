@@ -21,6 +21,7 @@
                         <th>Nama</th>
                         <th>Gambar</th>
                         <th>Kategori</th>
+                        <th>Supplier</th>
                         <th>Stok</th>
                         <th>Harga Modal</th>
                         <th>Harga Jual</th>
@@ -31,7 +32,7 @@
                   <tbody>
                     <?php 
                       $no = 1;
-                      $query = mysqli_query($kon, "SELECT * FROM tanam ORDER BY idtanam DESC");
+                      $query = mysqli_query($kon, "SELECT * FROM tanam JOIN supplier ON tanam.idsupplier = supplier.idsupplier ORDER BY idtanam DESC");
                       while($data = mysqli_fetch_array($query)){
                         ?>
                           <tr class="text-center">
@@ -39,6 +40,7 @@
                           <td><?= $data['namatanam'] ?></td>  
                           <td><a target="_blank" href="../img/<?= $data['gambar'] ?>"><img src="../img/<?= $data['gambar'] ?>" width='60px'></a></td>         
                           <td><?= $data['kategori'] ?></td>           
+                          <td><?= $data['nsupplier'] ?></td>           
                           <td><?= $data['stok'] ?></td>           
                           <td>Rp. <?= number_format($data['modal'],0,',','.') ?> </td>            
                           <td>Rp. <?= number_format($data['harga'],0,',','.') ?> </td>          

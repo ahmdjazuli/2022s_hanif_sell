@@ -14,7 +14,7 @@ Bahasa Pemograman :
 3. CSS
 
 PEMBAHARUAN :
-1. Sudah ditambakan data supplier dan berelasi ke barang masuk.
+1. Sudah ditambakan data supplier dan berelasi ke stok barang.
 
 Fitur Website :
 1. Template Scorilo (Coklat Putih)

@@ -1,6 +1,6 @@
 <?php require('headernya.php');
 	$idkurir = $_GET['idkurir'];
-	$query = mysqli_query($kon, "SELECT * FROM kurir WHERE idkurir = '$idkurir'");
+	$query = mysqli_query($kon, "SELECT * FROM kurir INNER JOIN ongkir ON kurir.idongkir = ongkir.idongkir WHERE idkurir = '$idkurir'");
 	$data  = mysqli_fetch_array($query);
 ?>
   <!-- Content Wrapper. Contains page content -->
@@ -34,8 +34,16 @@
                     <input type="text" class="form-control" name="kontakkurir" value="<?= $data['kontakkurir'] ?>">
                   </div>
                   <div class="form-group">
-                    <label>Alamat</label>
-                    <textarea class="form-control" name="alamatkurir"><?= $data['alamatkurir'] ?></textarea>
+                    <label>Kota</label>
+                    <select name="idongkir" class="form-control">
+                      <option value="<?= $data['idongkir'] ?>"><?= $data['kota'] ?></option>
+                      <?php
+                        $ahay = mysqli_query($kon, "SELECT * FROM ongkir ORDER BY kota ASC");
+                          while($baris = mysqli_fetch_array($ahay)) {
+                            echo "<option value='$baris[idongkir]'>$baris[kota]</option>";
+                          } 
+                        ?>
+                    </select>
                   </div>
                   <div class="form-group">
                     <label>Jenis Kelamin</label><br>
@@ -63,14 +71,14 @@
 <?php 
   require('../koneksi.php');
   if (isset($_POST['simpan'])) {
-    $alamatkurir    = $_REQUEST['alamatkurir'];
+    $idongkir    = $_REQUEST['idongkir'];
     $namakurir    = $_REQUEST['namakurir'];
     $username    = $_REQUEST['username'];
     $password    = $_REQUEST['password'];
     $kontakkurir    = $_REQUEST['kontakkurir'];
     $jkkurir    = $_REQUEST['jkkurir'];
 
-    $ubah = mysqli_query($kon,"UPDATE kurir SET alamatkurir='$alamatkurir', namakurir='$namakurir', username = '$username', password = '$password', kontakkurir = '$kontakkurir', jkkurir = '$jkkurir' WHERE idkurir = '$idkurir'");
+    $ubah = mysqli_query($kon,"UPDATE kurir SET idongkir='$idongkir', namakurir='$namakurir', username = '$username', password = '$password', kontakkurir = '$kontakkurir', jkkurir = '$jkkurir' WHERE idkurir = '$idkurir'");
     if($ubah){
       ?> <script>alert('Berhasil Diperbaharui');window.location='kurir.php';</script> <?php
     }else{

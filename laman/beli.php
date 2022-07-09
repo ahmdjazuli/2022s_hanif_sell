@@ -105,6 +105,18 @@
                         <th class="hide"></th>
                     </tr>
                   </thead>
+                  <tfoot class="table-dark">
+                    <tr class="text-center">
+                        <th>No</th>
+                        <th>Tanggal</th>
+                        <th>Pembeli</th>
+                        <th>Total</th>
+                        <th>Tujuan</th>
+                        <th>Bukti Pembayaran</th>
+                        <th>Status</th>
+                        <th class="hide"></th>
+                    </tr>
+                  </tfoot>
                   <tbody>
                     <?php 
                       $no = 1;

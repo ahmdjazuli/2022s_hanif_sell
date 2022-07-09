@@ -20,15 +20,14 @@
                         <th>Nama</th>
                         <th>Username</th>
                         <th>Kontak</th>
-                        <th>Alamat</th>
-                        <th>Layanan</th>
+                        <th>Kota</th>
                         <th class="hide"></th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php 
                       $no = 1;
-                      $query = mysqli_query($kon, "SELECT * FROM kurir WHERE idkurir = '$hohoho[idkurir]' ORDER BY namakurir ASC");
+                      $query = mysqli_query($kon, "SELECT * FROM kurir INNER JOIN ongkir ON kurir.idongkir = ongkir.idongkir WHERE idkurir = '$hohoho[idkurir]' ORDER BY namakurir ASC");
                       while($data = mysqli_fetch_array($query)){
                         ?>
                           <tr class="text-center">
@@ -41,8 +40,7 @@
                             } ?></td>         
                           <td><?= $data['username'] ?></td>           
                           <td><?= $data['kontakkurir'] ?></td>           
-                          <td><?= $data['alamatkurir'] ?></td>           
-                          <td><?= $data['layanan'] ?></td>           
+                          <td><?= $data['kota'] ?></td>           
                           <td>
                             <button class="btn bg-danger" type="button"><a href="kurir_edit.php?idkurir=<?= $data['idkurir'] ?>" class="text-white"><i class="far fa-edit"></i></a></button>
                           </td>

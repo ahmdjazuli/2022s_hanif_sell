@@ -54,6 +54,20 @@
                       }
                     ?>
                   </tbody>
+                  <tfoot class="table-dark">
+                    <tr class="text-center">
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Gambar</th>
+                        <th>Kategori</th>
+                        <th>Supplier</th>
+                        <th>Stok</th>
+                        <th>Harga Modal</th>
+                        <th>Harga Jual</th>
+                        <th>Terjual</th>
+                        <th class="hide"></th>
+                    </tr>
+                  </tfoot>
                 </table>
               </div>
               <!-- /.card-body -->

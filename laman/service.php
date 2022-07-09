@@ -24,6 +24,15 @@
                         <th class="hide"></th>
                     </tr>
                   </thead>
+                  <tfoot class="table-dark">
+                    <tr class="text-center">
+                        <th>No</th>
+                        <th>Nama</th>
+                        <th>Keterangan</th>
+                        <th>Harga</th>
+                        <th class="hide"></th>
+                    </tr>
+                  </tfoot>
                   <tbody>
                     <?php 
                       $no = 1;

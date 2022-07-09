@@ -38,7 +38,6 @@
   <link rel="stylesheet" href="../assets/fonts/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="../assets/css/adminlte.min.css">
   <link rel="stylesheet" href="../assets/css/costum.css">
-  <link rel="stylesheet" href="../assets/plugins/pace-progress/themes/black/pace-theme-center-radar.css"> 
   <link rel="stylesheet" href="../assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <link rel="stylesheet" href="../assets/plugins/datatables-select/css/searchPanes.dataTables.min.css">
   <link rel="stylesheet" href="../assets/plugins/sweetalert2/dark.css">
@@ -81,11 +80,10 @@
           <li class="nav-item">
             <a class="nav-link" href="user.php" data-toggle="tooltip" title="Data Pengguna"><i class="fas fa-user-astronaut"></i></a>
           </li>
-           <li class="nav-item">
-            <a class="nav-link" href="kurir.php" data-toggle="tooltip" title="Data Kurir"><i class="fas fa-user-circle"></i></a>
-          </li>
-          
           <li class="nav-item text-white"> <a class="nav-link" href="#">|</a> </li>
+           <li class="nav-item">
+            <a class="nav-link" href="kurir.php" data-toggle="tooltip" title="Kurir"><i class="fas fa-user-circle"></i></a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="tanammasuk.php" data-toggle="tooltip" title="Barang Masuk"><i class="fas fa-inbox"></i></a>
           </li>
@@ -103,6 +101,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="kirim.php" data-toggle="tooltip" title="Pengiriman"><i class="fas fa-shipping-fast"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="ulasan.php" data-toggle="tooltip" title="Ulasan"><i class="fas fa-star"></i></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="pendapatan1.php" data-toggle="tooltip" title="Pendapatan Bulanan"><i class="fas fa-medkit"></i></a>

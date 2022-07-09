@@ -77,8 +77,8 @@
 				<?php endforeach ?>
 				</tbody>
 				</table>
-				<a class="btn" style="background-color: #9ad8fe; color: black;" href="belanja.php">Lanjutkan Belanja</a>
-				<a class="btn btn-primary" href="cek.php">Checkout</a>
+				<a class="btn" style="background-color: #9ad8fe; color: black;" href="belanja.php">Kembali Belanja</a>
+				<a class="btn btn-primary" href="cek.php">Lanjut Pilih Ongkir</a>
 			</div>
 		</form>
 	</div>

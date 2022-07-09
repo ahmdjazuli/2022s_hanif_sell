@@ -23,11 +23,15 @@
                     <input type="text" class="form-control" name="username">
                   </div>
                   <div class="form-group">
-                    <label>Layanan</label>
-                    <select name="layanan" class="form-control">
-                      <option value="JNE">JNE</option>
-                      <option value="J&T Express">J&T Express</option>
-                      <option value="SiCepat Ekspress">SiCepat Ekspress</option>
+                    <label>Kota</label>
+                    <select name="idongkir" class="form-control">
+                      <option value="">-</option>
+                      <?php
+                        $ahay = mysqli_query($kon, "SELECT * FROM ongkir ORDER BY kota ASC");
+                          while($baris = mysqli_fetch_array($ahay)) {
+                            echo "<option value='$baris[idongkir]'>$baris[kota]</option>";
+                          } 
+                        ?>
                     </select>
                   </div>
                   <div class="form-group">
@@ -38,7 +42,7 @@
                 </div>
                 <div class="card-footer">
                   <button type="submit" name="simpan" class="btn btn-dark" data-toggle="tooltip" data-placement="bottom" title="Simpan"><i class="far fa-handshake"></i></button>
-                  <button type="button" onclick="window.location='user.php';" data-toggle="tooltip" data-placement="bottom" title="Kembali" class="btn btn-danger float-right">
+                  <button type="button" onclick="window.location='kurir.php';" data-toggle="tooltip" data-placement="bottom" title="Kembali" class="btn btn-danger float-right">
                     <i class="far fa-window-close"></i></button>
                 </div>
               </div> <!-- /.card-body -->
@@ -55,14 +59,14 @@
     $namakurir    = $_REQUEST['namakurir'];
     $username = $_REQUEST['username'];
     $jk = $_REQUEST['jk'];
-    $layanan = $_REQUEST['layanan'];
+    $idongkir = $_REQUEST['idongkir'];
 
     $cek = mysqli_query($kon, "SELECT * FROM kurir WHERE username='$username'");
 
     if(mysqli_num_rows($cek)>0){
         ?> <script>alert('Nama username Sudah Digunakan');window.location='kurir_input.php';</script> <?php
     }else{
-        $tambah = mysqli_query($kon,"INSERT INTO kurir(username, namakurir, password, jkkurir, layanan) VALUES ('$username','$namakurir','$username','$jk','$layanan')");
+        $tambah = mysqli_query($kon,"INSERT INTO kurir(username, namakurir, password, jkkurir, idongkir) VALUES ('$username','$namakurir','$username','$jk','$idongkir')");
         if($tambah){
           ?> <script>alert('Berhasil Disimpan');window.location='kurir.php';</script> <?php
         }else{

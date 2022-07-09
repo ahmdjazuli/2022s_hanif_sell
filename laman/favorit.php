@@ -87,6 +87,15 @@
                         <th>Kategori</th>
                     </tr>
                   </thead>
+                  <tfoot class="table-dark">
+                    <tr class="text-center">
+                        <th>No</th>
+                        <th>Tanggal</th>
+                        <th>Nama Pelanggan</th>
+                        <th>Nama Barang</th>
+                        <th>Kategori</th>
+                    </tr>
+                  </tfoot>
                   <tbody>
                     <?php 
                       $no = 1;

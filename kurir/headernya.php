@@ -36,7 +36,6 @@
   <link rel="stylesheet" href="../assets/fonts/fontawesome-free/css/all.min.css">
   <link rel="stylesheet" href="../assets/css/adminlte.min.css">
   <link rel="stylesheet" href="../assets/css/costum.css">
-  <link rel="stylesheet" href="../assets/plugins/pace-progress/themes/black/pace-theme-center-radar.css"> 
   <link rel="stylesheet" href="../assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <link rel="stylesheet" href="../assets/plugins/datatables-select/css/searchPanes.dataTables.min.css">
   <link rel="stylesheet" href="../assets/plugins/sweetalert2/dark.css">

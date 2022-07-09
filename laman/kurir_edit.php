@@ -1,6 +1,6 @@
 <?php require('headernya.php');
 	$idkurir = $_GET['idkurir'];
-	$query = mysqli_query($kon, "SELECT * FROM kurir WHERE idkurir = '$idkurir'");
+	$query = mysqli_query($kon, "SELECT * FROM kurir INNER JOIN ongkir ON kurir.idongkir = ongkir.idongkir WHERE idkurir = '$idkurir'");
 	$data  = mysqli_fetch_array($query);
 ?>
   <!-- Content Wrapper. Contains page content -->
@@ -26,26 +26,16 @@
                     <input type="text" class="form-control" name="kontakkurir" value="<?= $data['kontakkurir'] ?>">
                   </div>
                   <div class="form-group">
-                    <label>Alamat</label>
-                    <textarea class="form-control" name="alamatkurir"><?= $data['alamatkurir'] ?></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label>Layanan</label>
-                    <select name="layanan" class="form-control">
-                        <option value="<?= $data['layanan'] ?>"><?= $data['layanan'] ?></option>
-                        <?php 
-                          if($data['layanan']=="SiCepat Ekspress"){
-                            ?> <option value="JNE">JNE</option> <?php
-                            ?> <option value="J&T Express">J&T Express</option> <?php
-                          }else if($data['layanan']=="JNE"){
-                            ?> <option value="J&T Express">J&T Express</option> <?php
-                            ?> <option value="SiCepat Ekspress">SiCepat Ekspress</option> <?php
-                          }else if($data['layanan']=="J&T Express"){
-                            ?> <option value="JNE">JNE</option> <?php
-                            ?> <option value="SiCepat Ekspress">SiCepat Ekspress</option> <?php
-                          }
+                    <label>Kota</label>
+                    <select name="idongkir" class="form-control">
+                      <option value="<?= $data['idongkir'] ?>"><?= $data['kota'] ?></option>
+                      <?php
+                        $ahay = mysqli_query($kon, "SELECT * FROM ongkir ORDER BY kota ASC");
+                          while($baris = mysqli_fetch_array($ahay)) {
+                            echo "<option value='$baris[idongkir]'>$baris[kota]</option>";
+                          } 
                         ?>
-                      </select>
+                    </select>
                   </div>
                   <div class="form-group">
                     <label>Jenis Kelamin</label><br>
@@ -73,13 +63,12 @@
 <?php 
   require('../koneksi.php');
   if (isset($_POST['simpan'])) {
-    $layanan    = $_REQUEST['layanan'];
+    $idongkir    = $_REQUEST['idongkir'];
     $namakurir    = $_REQUEST['namakurir'];
     $jkkurir    = $_REQUEST['jkkurir'];
     $kontakkurir    = $_REQUEST['kontakkurir'];
-    $alamatkurir    = $_REQUEST['alamatkurir'];
 
-    $ubah = mysqli_query($kon,"UPDATE kurir SET layanan='$layanan', namakurir='$namakurir', jkkurir = '$jkkurir', alamatkurir='$alamatkurir', kontakkurir = '$kontakkurir' WHERE idkurir = '$idkurir'");
+    $ubah = mysqli_query($kon,"UPDATE kurir SET idongkir='$idongkir', namakurir='$namakurir', jkkurir = '$jkkurir', kontakkurir = '$kontakkurir' WHERE idkurir = '$idkurir'");
     if($ubah){
       ?> <script>alert('Berhasil Diperbaharui');window.location='kurir.php';</script> <?php
     }else{

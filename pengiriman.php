@@ -1,4 +1,5 @@
-<?php require('header.php'); require('tgl_indo.php'); ?>
+<?php require('header.php'); require('tgl_indo.php'); $idbeli = $_GET['idbeli'];
+  $beliproduk = mysqli_query($kon, "SELECT * FROM beliproduk INNER JOIN tanam ON beliproduk.idtanam = tanam.idtanam WHERE idbeli = '$idbeli' ORDER BY namatanam ASC"); ?>
 <link rel="stylesheet" href="assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
 	<div class="container">
@@ -59,7 +60,7 @@
                           <td><?= $no++ ?></td>
                            <td><?= haribulantahun($data['tglbeli'],true)?></td>          
                           <td>
-                            <a href="kirim.php?idbeli=<?= $data['idbeli'] ?>"><?= $data['nama'] ?></a>
+                            <a href="pengiriman.php?idbeli=<?= $data['idbeli'] ?>"><?= $data['nama'] ?></a>
                           </td>             
                           <td><?= $data['alamat'] ?></td>           
                           <td><?= $data['namakurir'] ?></td>        
@@ -85,4 +86,52 @@
 <br>
 </div> <!-- container -->
 </section>
+<?php if(mysqli_num_rows($beliproduk)> 0){ ?>
+<section id="mu-contact" style="padding: 0;">
+ <div class="container">
+   <div class="row">
+     <div class="col-md-12">
+       <div class="mu-contact-area">
+        <h1 class="text-center">Detail Transaksi</h1>
+        <div class="mu-contact-content">           
+          <div class="row">
+            <div class="col-md-12">
+              <table class="table table-bordered">
+                <thead style="background-color: #333333; color: white;">
+                  <tr>
+                    <th class="text-center">No</th>
+                    <th class="text-center">Nama Barang</th>
+                    <th class="text-center">Kategori</th>
+                    <th class="text-center">Jumlah</th>
+                    <th class="text-center">Harga (Rp)</th>
+                    <th class="text-center">Sub Harga (Rp)</th>
+                    <?= $memori['level'] =='pelanggan' ? "<th></th>" : ''; ?>
+                  </tr>
+                </thead>
+                <tbody>
+                <?php $no = 1;
+                    while($j = mysqli_fetch_array($beliproduk)){?>
+                      <tr class="text-center">
+                      <td><?= $no++ ?></td>
+                      <td><?= $j['namatanam'] ?></td>           
+                      <td><?= $j['kategori'] ?></td>         
+                      <td><?= $j['jumlah'] ?></td>           
+                      <td><?= number_format($j['harga'],0,',','.') ?> </td>
+                      <td><?= number_format($j['subharga'],0,',','.') ?> </td> 
+                      <?php if($memori['level'] =='pelanggan'){ ?>
+                        <td><button class="btn" style="background: #1ba5fb; color: white;" onclick="window.location='ulasan_input.php?namatanam=<?= $j[namatanam] ?>&idbeli=<?= $j[idbeli] ?>'">Berikan Ulasan</button></td>         
+                      <?php } ?>
+                <?php } ?>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- end contact content -->
+       </div>
+     </div>
+   </div>
+ </div>
+</section>
+ <?php } ?>
 <?php require('footer.php') ?>

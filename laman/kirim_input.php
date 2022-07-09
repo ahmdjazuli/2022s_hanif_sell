@@ -30,7 +30,7 @@
                     <select name="idkurir" class="form-control" required>
                       <option value="">-</option>
                     <?php
-                      $ahay = mysqli_query($kon, "SELECT * FROM kurir ORDER BY namakurir ASC");
+                      $ahay = mysqli_query($kon, "SELECT * FROM kurir INNER JOIN ongkir ON kurir.idongkir = ongkir.idongkir WHERE kota = '$data[namakota]' ORDER BY namakurir ASC");
                         while($baris = mysqli_fetch_array($ahay)) {
                           echo "<option value='$baris[idkurir]'>$baris[namakurir]</option>";
                         } 

@@ -9,6 +9,10 @@
 		?><script>alert('Troli Belanja Kosong, Silahkan Berbelanja!');
 	window.location = 'index.php';</script><?php
 	}
+
+	$idongkir = $_POST['idongkir'];
+	$ahay = mysqli_query($kon, "SELECT * FROM ongkir WHERE idongkir = '$idongkir'");
+	$ahayde = mysqli_fetch_array($ahay);
 ?>
 <div class="container">
 		<div class="row">
@@ -29,7 +33,7 @@
 <div class="container toparea">
 	<div class="underlined-title">
 		<div class="editContent">
-			<h1 class="text-center latestitems">Pilih Ongkir</h1>
+			<h1 class="text-center latestitems">Lakukan Pembayaran</h1>
 		</div>
 		<div class="wow-hr type_short">
 			<span class="wow-hr-h">
@@ -93,13 +97,20 @@
 					<th >
 					<span>Rp. <?= number_format($totalbelanja,0,',','.'); ?></span>
 					</th>
+					
+				</tr>
+				<tr>
+					<th colspan="3">Total Keseluruhan: </th>
+					<th >
+					<span>Rp. <?= number_format($totalbelanja+$ahayde['tarif'],0,',','.'); ?></span>
+					</th>
 				</tr>
 				</tfoot>
 				</table>
 			</div>
 		</form>
 		<div id="edd_checkout_form_wrap" class="edd_clearfix">
-			<form id="edd_purchase_form" class="edd_form" method="POST" action="cekfinish.php">
+			<form id="edd_purchase_form" class="edd_form" enctype="multipart/form-data" method="POST">
 				<fieldset id="edd_checkout_user_info">
 					<legend>Info Pembeli dan Pilih Ongkir</legend>
 					<div class="row">
@@ -125,25 +136,95 @@
 							<textarea class="form-control" name="alamat" readonly><?= $memori['alamat'] ?></textarea></p>
 						</div>
 						<div class="col-md-6 col-sm-12">
-							<p><label>Pilih Ongkos Kirim *</label>
-							<select name="idongkir" class="form-control" required>
-							<option value="">Pilih</option>
-		                    <?php
-		                      $ahay = mysqli_query($kon, "SELECT * FROM ongkir ORDER BY kota DESC");
-		                        while($baris = mysqli_fetch_array($ahay)) {
-		                          echo "<option value='$baris[idongkir]'>$baris[kota] - Rp. $baris[tarif]</option>";
-		                        } 
-		                      ?>
-		                  	</select></p>
+							<p><label>Foto Bukti Pembayaran *</label>
+							<input type="file" name="bukti" class="form-control" required></p>
+						</div>
+						<div class="col-md-6 col-sm-12">
+							<p><label>Kota dan Biaya Ongkir</label>
+							<input type="hidden" name="idongkir" value="<?= $idongkir ?>" class="form-control" readonly>
+							<input type="text" value="<?= $ahayde['kota'].' - Rp.'.$ahayde['tarif'] ?>" class="form-control" readonly>
+		                      </p>
 						</div>
 
 					</div>
-					<a class="btn" style="background-color: #9ad8fe; color: black;" href="keranjang.php">Kembali Ke Keranjang</a>
-					<button class="btn btn-primary" type="submit">Lakukan Pembayaran</button>L
+				</fieldset>
+				<fieldset id="edd_purchase_submit">
+					<input type="submit" class="edd-submit button" name="bayar" value="Bayar">
 				</fieldset>
 			</form>
 		</div>
 	</div>
 </div>
 </section>
+<section class="content-block" style="background-color:#00bba7;">
+<div class="container text-center">
+	<div class="row">
+		<div class="col-sm-10 col-sm-offset-1">
+			<div class="item" data-scrollreveal="enter top over 0.4s after 0.1s">
+				<h1 class="callactiontitle"> Selesaikan Pembayaran melalui <span class="callactionbutton"><i class="fa fa-gift"></i> BANK BRI 137-061665-3275 AN. Fikriansyah </span>
+				</h1>
+			</div>
+		</div>
+	</div>
+</div>
+</section>
+<?php 
+	if(isset($_POST['bayar'])){
+		$id = $_REQUEST['id'];
+		$tglbeli = date('Y-m-d');
+		$idongkir = $_REQUEST['idongkir'];
+
+		$ongkirku = mysqli_query($kon, "SELECT * FROM ongkir WHERE idongkir = '$idongkir'");
+		$tarifnya = mysqli_fetch_array($ongkirku);
+		$total = $totalbelanja + $tarifnya['tarif'];
+
+		$ekstensi_diperbolehkan	= array('png','jpg','jpeg');
+		$namafoto = $_FILES['bukti']['name'];
+		$x = explode('.', $namafoto);
+		$ekstensi = strtolower(end($x));
+		$ukuran	= $_FILES['bukti']['size'];
+		$file_tmp = $_FILES['bukti']['tmp_name'];
+
+
+		if(in_array($ekstensi, $ekstensi_diperbolehkan) === true){
+			if($ukuran < 2048000){	
+				$namabaru = rand(1000,9999).preg_replace("/[^a-zA-Z0-9]/", ".", $namafoto);		
+				move_uploaded_file($file_tmp, 'img/'.$namabaru);
+				
+				// tabel beli
+				$ongkir = mysqli_query($kon, "SELECT * FROM ongkir WHERE idongkir = '$idongkir'");
+				$row = mysqli_fetch_array($ongkir);
+				$namakota = $row['kota'];
+				$tarifnya = $row['tarif'];
+				$alamat = $_REQUEST['alamat'];
+
+				$hasil = mysqli_query($kon,"INSERT INTO beli (id,total,tglbeli,idongkir,status,bukti, namakota, tarifnya, alamat) VALUES ('$id','$total','$tglbeli','$idongkir','Menunggu','$namabaru','$namakota','$tarifnya','$alamat')");
+
+				// tabel beliproduk
+				$idbeli = $kon->insert_id;
+				foreach ($_SESSION['keranjang'] as $idtanam => $jumlah) {
+					$query = mysqli_query($kon, "SELECT * FROM tanam WHERE idtanam = '$idtanam'");
+					$ambil = mysqli_fetch_array($query);
+
+					$namanya = $ambil['namatanam'];
+					$harganya = $ambil['harga'];
+					$subharga = $ambil['harga']*$jumlah;
+
+					mysqli_query($kon,"INSERT INTO beliproduk (idbeli, idtanam,jumlah, namanya, harganya, subharga) VALUES ('$idbeli','$idtanam','$jumlah','$namanya','$harganya','$subharga')");
+				}
+
+				if($hasil){
+					?> <script>alert('Pembelian Sukses.'); window.location = 'riwayatbeli.php?idbeli=<?=$idbeli?>';</script><?php
+					unset($_SESSION['keranjang']);
+				}else{
+					?> <script>alert('Gagal, cek kembali!.'); window.location = 'cek.php';</script><?php
+				}
+			}else{
+				?> <script>alert('Gagal, Ukuran File Maksimal 2MB!'); window.location = 'cek.php';</script><?php
+			}
+		}else{
+			?> <script>alert('Gagal, File yang diupload format jpg, jpeg atau png!'); window.location = 'cek.php';</script><?php
+		}
+	}
+?>
 <?php require('footer.php') ?>

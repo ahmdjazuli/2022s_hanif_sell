@@ -13,27 +13,35 @@ Bahasa Pemograman :
 2. Javascript
 3. CSS
 
+REVISIAN :
+1. Sudah ditambahkan Filter disemua tabel data.
+2. Data Kurir diperbaiki dan jadi Report Kurir.
+3. Filter Mata diubah jadi kata" filter.
+4. Ditambahkan report Ulasan.
+5. Memperbaiki Kirim Input
+6. Proses Checkout 2x. 
+
 PEMBAHARUAN :
 1. Sudah ditambakan data supplier dan berelasi ke stok barang.
 
 Fitur Website :
-1. Template Scorilo (Coklat Putih)
-2. Template Admin LTE 3.0 (Navbar Top) 
-3. Multi User (Admin, Kurir dan Pelanggan) (3)
-4. Halaman Utama (Belanja, Troli, Checkout, Login)
-5. Data Master terdiri dari : Data Pengguna, Kurir, Service (NEW), Ongkir, Biaya Pengeluaran dan Barang. (6)
-6. Data Report terdiri dari (10) : 
+1. Multi User (Admin, Kurir dan Pelanggan) (3)
+2. Halaman Utama (Belanja, Troli, Checkout, Login)
+3. Data Master terdiri dari : Data Pengguna, Service, Ongkir, Biaya Pengeluaran dan Barang. (5)
+4. Data Report terdiri dari (12) : 
 	1. Barang Masuk
 	2. Transaksi Barang
-	3. Transaksi Service (NEW)
+	3. Transaksi Service
 	4. Pengiriman
 	5. Pendapatan Harian Pendapatan Bulanan
 	6. Nota Pembayaran
-	7. (NEW) Favorit
-	8. (NEW) Grafik Statistik Penjualan Terlaris
-	9. (NEW) Grafik Pendapatan Bulanan
-	10. (NEW) Barang Rusak
-7. Alert Standar
-8. CRUD Standar
-9. Grafik (Tersedia)
-10. Animasi Loading (Tersedia)
+	7. Favorit
+	8. Grafik Statistik Penjualan Terlaris
+	9. Grafik Pendapatan Bulanan
+	10. Barang Rusak
+	11. Kurir (NEW)
+	12. Ulasan (NEW)
+5. Alert Standar
+6. CRUD Standar
+7. Grafik (Tersedia)
+8. Animasi Loading (Tersedia)

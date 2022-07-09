@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 27, 2022 at 01:55 PM
+-- Generation Time: Jul 09, 2022 at 09:59 AM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -49,7 +49,10 @@ INSERT INTO `beli` (`idbeli`, `id`, `idongkir`, `tglbeli`, `total`, `bukti`, `st
 (43, 4, 8, '2022-06-13', 367000, '1712kwitansi.png', 'Diterima', 'Martapura', 17000, 'Jl. Bunga Melati kota Banjarbaru'),
 (44, 6, 3, '2022-06-14', 75000, '6846IMG.20211125.WA0000.jpg', 'Diterima', 'Barabai', 5000, 'Jl. Trikora Rt.32 Rw.5 Kode Pos 70721 Guntung Manggis'),
 (45, 3, 6, '2022-06-15', 1424000, '5258IMG.20210815.WA0023.jpg', 'Diterima', 'Marabahan', 25000, 'Gang Hijrah Raya, Muhibbin 4 Sekumpul'),
-(46, 6, 12, '2022-05-31', 1399000, '5799IMG.20210910.WA0004.jpg', 'Diterima', 'COD', 0, 'Jl. Trikora Rt.32 Rw.5 Kode Pos 70721 Guntung Manggis');
+(46, 6, 12, '2022-05-31', 1399000, '5799IMG.20210910.WA0004.jpg', 'Diterima', 'COD', 0, 'Jl. Trikora Rt.32 Rw.5 Kode Pos 70721 Guntung Manggis'),
+(47, 2, 3, '2022-07-09', 75000, '5184IMG.20211022.WA0026.jpg', 'Diterima', 'Barabai', 5000, 'Landasan Ulin, Banjarbaru.'),
+(49, 3, 9, '2022-07-09', 318000, '1100Screenshot.2020.0821.193603.9b553e87d5bc57b8c2fe37f8ae5bc043.png', 'Diterima', 'Pelaihari', 18000, 'Gang Hijrah Raya, Muhibbin 4 Sekumpul'),
+(51, 4, 8, '2022-07-09', 366000, '6008IMG.20210910.WA0004.jpg', 'Diterima', 'Martapura', 17000, 'Jl. Bunga Melati ');
 
 -- --------------------------------------------------------
 
@@ -75,7 +78,10 @@ INSERT INTO `beliproduk` (`idbeliproduk`, `idbeli`, `idtanam`, `jumlah`, `namany
 (37, 43, 20, 5, 'Mouse Logitech', 70000, 350000),
 (38, 44, 20, 1, 'Mouse Logitech', 70000, 70000),
 (39, 45, 22, 1, 'VOYAGER68 Lightyear Edition CNC Alu South Facing Mechanical Keyboard - BAREBONES', 1399000, 1399000),
-(40, 46, 22, 1, 'VOYAGER68 Lightyear Edition CNC Alu South Facing Mechanical Keyboard - BAREBONES', 1399000, 1399000);
+(40, 46, 22, 1, 'VOYAGER68 Lightyear Edition CNC Alu South Facing Mechanical Keyboard - BAREBONES', 1399000, 1399000),
+(41, 47, 20, 1, 'Mouse Logitech', 70000, 70000),
+(43, 49, 21, 1, 'NOVA Ultralight Wireless Gaming Mouse 2.4ghz by Press Play', 300000, 300000),
+(46, 51, 23, 1, 'Type C Coiled Cable Mechanical Keyboard Aviator by Press Play - GRAPHITE, V1', 349000, 349000);
 
 --
 -- Triggers `beliproduk`
@@ -161,7 +167,10 @@ CREATE TABLE `kirim` (
 INSERT INTO `kirim` (`idkirim`, `idbeli`, `idkurir`, `penerima`, `foto`, `ket`, `statuskirim`) VALUES
 (3, 43, 3, 'adiknya', '3077IMG.20191218.135559..2..jpg', 'Barang Sampai', 'Selesai'),
 (4, 44, 3, 'pembeli yg bersangkutan', '7143IMG.20200811.092255..2..jpg', 'Barang Sampai', 'Selesai'),
-(5, 45, 2, 'yg bersangkutan', '6712IadsMG.20191218.135559..2..jpg', 'Barang Sampai.', 'Selesai');
+(5, 45, 2, 'yg bersangkutan', '6712IadsMG.20191218.135559..2..jpg', 'Barang Sampai.', 'Selesai'),
+(6, 47, 3, 'yg bersangkutan', '9789IadsMG.20191218.135559..2..jpg', 'barang sampai', 'Selesai'),
+(7, 49, 4, 'adiknya', '4481IadsMG.20191218.135559..2..jpg', 'barang sampai', 'Selesai'),
+(8, 51, 5, 'ibunya sendiri', '2427IadsMG.20191218.135559..2..jpg', 'barang sampai', 'Selesai');
 
 -- --------------------------------------------------------
 
@@ -171,22 +180,24 @@ INSERT INTO `kirim` (`idkirim`, `idbeli`, `idkurir`, `penerima`, `foto`, `ket`, 
 
 CREATE TABLE `kurir` (
   `idkurir` int(3) NOT NULL,
+  `idongkir` int(2) NOT NULL,
   `username` varchar(10) NOT NULL,
   `password` varchar(10) NOT NULL,
   `namakurir` varchar(80) NOT NULL,
   `kontakkurir` varchar(50) NOT NULL,
-  `alamatkurir` text NOT NULL,
-  `jkkurir` enum('0','1') NOT NULL,
-  `layanan` varchar(20) NOT NULL
+  `jkkurir` enum('0','1') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `kurir`
 --
 
-INSERT INTO `kurir` (`idkurir`, `username`, `password`, `namakurir`, `kontakkurir`, `alamatkurir`, `jkkurir`, `layanan`) VALUES
-(2, 'ikhwan', 'ikhwan', 'Akhmad Ikhwan', '051178659932', 'Banjarmasin', '0', 'JNE'),
-(3, 'popon', 'popon', 'Popon Sugiantoro', '085369696664', 'Barabai', '0', 'J&T Express');
+INSERT INTO `kurir` (`idkurir`, `idongkir`, `username`, `password`, `namakurir`, `kontakkurir`, `jkkurir`) VALUES
+(2, 2, 'ikhwan', 'ikhwan', 'Akhmad Ikhwan', '051178659932', '0'),
+(3, 3, 'popon', 'popon', 'Popon Sugiantoro', '085369696664', '0'),
+(4, 9, 'bobi', 'bobi', 'bobi', '08928441255', '0'),
+(5, 8, 'siti', 'siti', 'Siti', '08552124124', '1'),
+(6, 5, 'chelsea', 'chelsea', 'Chelsea Oliver', '08924412442', '1');
 
 -- --------------------------------------------------------
 
@@ -310,10 +321,10 @@ CREATE TABLE `tanam` (
 --
 
 INSERT INTO `tanam` (`idtanam`, `idsupplier`, `namatanam`, `kategori`, `modal`, `harga`, `deskripsi`, `gambar`, `stok`, `terjual`) VALUES
-(20, 4, 'Mouse Logitech', 'Mouse', 50000, 70000, 'dari taiwan', '9663mouse2.jpg', 50, 6),
-(21, 1, 'NOVA Ultralight Wireless Gaming Mouse 2.4ghz by Press Play', 'Mouse', 250000, 300000, 'NOVA v2 Wireless Gaming Mouse. Semua stock sudah v2, tidak ada lagi yg v1.', '371316e4c1a4.fbee.430d.adab.1741de5e23df.jpg', 2, 0),
+(20, 4, 'Mouse Logitech', 'Mouse', 50000, 70000, 'dari taiwan', '9663mouse2.jpg', 48, 8),
+(21, 1, 'NOVA Ultralight Wireless Gaming Mouse 2.4ghz by Press Play', 'Mouse', 250000, 300000, 'NOVA v2 Wireless Gaming Mouse. Semua stock sudah v2, tidak ada lagi yg v1.', '371316e4c1a4.fbee.430d.adab.1741de5e23df.jpg', 0, 2),
 (22, 1, 'VOYAGER68 Lightyear Edition CNC Alu South Facing Mechanical Keyboard - BAREBONES', 'Keyboard', 900000, 1399000, 'Software bisa di download dari link di Instagram @pressplayid.', '71185ce1faa0.96c5.4dd8.ae84.b82965c73fc1.jpg', 3, 2),
-(23, 3, 'Type C Coiled Cable Mechanical Keyboard Aviator by Press Play - GRAPHITE, V1', 'Keyboard', 250000, 349000, 'Specs:\r\n- Reverse Coiled\r\n- Double Sleeved with Techflex mesh\r\n- Total length +/- 1.6m', '43083e412be2.9a1c.48c8.9af6.59c3e1168fbc.jpg', 3, 0);
+(23, 3, 'Type C Coiled Cable Mechanical Keyboard Aviator by Press Play - GRAPHITE, V1', 'Keyboard', 250000, 349000, 'Specs:\r\n- Reverse Coiled\r\n- Double Sleeved with Techflex mesh\r\n- Total length +/- 1.6m', '43083e412be2.9a1c.48c8.9af6.59c3e1168fbc.jpg', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -440,6 +451,30 @@ INSERT INTO `transaksi` (`notransaksi`, `id`, `tgl`, `barang`, `total`, `catatan
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `ulasan`
+--
+
+CREATE TABLE `ulasan` (
+  `idulasan` int(5) NOT NULL,
+  `idtanam` int(5) NOT NULL,
+  `id` int(5) NOT NULL,
+  `waktu` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `ulasannya` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ulasan`
+--
+
+INSERT INTO `ulasan` (`idulasan`, `idtanam`, `id`, `waktu`, `ulasannya`) VALUES
+(1, 20, 2, '2022-07-09 07:07:17', 'mantap'),
+(2, 22, 3, '2022-07-09 07:15:06', 'packing aman, barang mantul'),
+(3, 21, 3, '2022-07-09 07:42:58', 'Mantap, lengkap'),
+(4, 23, 4, '2022-07-09 07:58:10', 'packing rapi, barang ok. nice');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -514,7 +549,8 @@ ALTER TABLE `kirim`
 -- Indexes for table `kurir`
 --
 ALTER TABLE `kurir`
-  ADD PRIMARY KEY (`idkurir`);
+  ADD PRIMARY KEY (`idkurir`),
+  ADD KEY `idongkir` (`idongkir`);
 
 --
 -- Indexes for table `ongkir`
@@ -569,6 +605,13 @@ ALTER TABLE `transaksi`
   ADD KEY `id` (`id`);
 
 --
+-- Indexes for table `ulasan`
+--
+ALTER TABLE `ulasan`
+  ADD PRIMARY KEY (`idulasan`),
+  ADD KEY `idtanam` (`idtanam`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -582,13 +625,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `beli`
 --
 ALTER TABLE `beli`
-  MODIFY `idbeli` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `idbeli` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `beliproduk`
 --
 ALTER TABLE `beliproduk`
-  MODIFY `idbeliproduk` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `idbeliproduk` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `detail`
@@ -606,13 +649,13 @@ ALTER TABLE `favorit`
 -- AUTO_INCREMENT for table `kirim`
 --
 ALTER TABLE `kirim`
-  MODIFY `idkirim` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idkirim` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `kurir`
 --
 ALTER TABLE `kurir`
-  MODIFY `idkurir` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idkurir` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `ongkir`
@@ -657,6 +700,12 @@ ALTER TABLE `tanamrusak`
   MODIFY `idtanamrusak` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `ulasan`
+--
+ALTER TABLE `ulasan`
+  MODIFY `idulasan` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
@@ -684,6 +733,12 @@ ALTER TABLE `detail`
 ALTER TABLE `favorit`
   ADD CONSTRAINT `favorit_ibfk_1` FOREIGN KEY (`id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `favorit_ibfk_2` FOREIGN KEY (`idtanam`) REFERENCES `tanam` (`idtanam`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `kurir`
+--
+ALTER TABLE `kurir`
+  ADD CONSTRAINT `kurir_ibfk_1` FOREIGN KEY (`idongkir`) REFERENCES `ongkir` (`idongkir`);
 
 --
 -- Constraints for table `tanam`

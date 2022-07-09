@@ -44,4 +44,3 @@ Fitur Website :
 5. Alert Standar
 6. CRUD Standar
 7. Grafik (Tersedia)
-8. Animasi Loading (Tersedia)

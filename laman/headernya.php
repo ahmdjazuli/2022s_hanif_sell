@@ -69,9 +69,6 @@
             <a class="nav-link" href="supplier.php" data-toggle="tooltip" title="Data Supplier"><i class="fas fa-toolbox"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="service.php" data-toggle="tooltip" title="Data Service"><i class="fab fa-servicestack"></i></a>
-          </li>
-          <li class="nav-item">
             <a class="nav-link" href="ongkir.php" data-toggle="tooltip" title="Data Ongkir"><i class="fas fa-file-invoice-dollar"></i></a>
           </li>
           <li class="nav-item">
@@ -95,9 +92,6 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="beli.php" data-toggle="tooltip" title="Transaksi Penjualan"><i class="fas fa-shopping-bag"></i></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="transaksi.php" data-toggle="tooltip" title="Transaksi Service"><i class="fab fa-flipboard"></i></a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="kirim.php" data-toggle="tooltip" title="Pengiriman"><i class="fas fa-shipping-fast"></i></a>

@@ -13,6 +13,10 @@ Bahasa Pemograman :
 2. Javascript
 3. CSS
 
+REVISIAN BARU:
+1. Data Service dan Transaksi Service udh dihapus (Tabel yang dihapus di database ialah : transaksi, detail dan service)
+2. 
+
 REVISIAN :
 1. Sudah ditambahkan Filter disemua tabel data.
 2. Data Kurir diperbaiki dan jadi Report Kurir.
@@ -21,14 +25,11 @@ REVISIAN :
 5. Memperbaiki Kirim Input
 6. Proses Checkout 2x. 
 
-PEMBAHARUAN :
-1. Sudah ditambakan data supplier dan berelasi ke stok barang.
-
 Fitur Website :
 1. Multi User (Admin, Kurir dan Pelanggan) (3)
 2. Halaman Utama (Belanja, Troli, Checkout, Login)
 3. Data Master terdiri dari : Data Pengguna, Service, Ongkir, Biaya Pengeluaran dan Barang. (5)
-4. Data Report terdiri dari (12) : 
+4. Data Report terdiri dari (10) : 
 	1. Barang Masuk
 	2. Transaksi Barang
 	3. Transaksi Service
@@ -39,8 +40,8 @@ Fitur Website :
 	8. Grafik Statistik Penjualan Terlaris
 	9. Grafik Pendapatan Bulanan
 	10. Barang Rusak
-	11. Kurir (NEW)
-	12. Ulasan (NEW)
+	11. Kurir
+	12. Ulasan
 5. Alert Standar
 6. CRUD Standar
 7. Grafik (Tersedia)

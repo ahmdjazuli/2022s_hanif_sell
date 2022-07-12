@@ -15,7 +15,7 @@ Bahasa Pemograman :
 
 REVISIAN BARU:
 1. Data Service dan Transaksi Service udh dihapus (Tabel yang dihapus di database ialah : transaksi, detail dan service)
-2. 
+2. Filter Cetak untuk Data Kurir ditambahkan utk mencetak Laporan Aktivitas Kurir.
 
 REVISIAN :
 1. Sudah ditambahkan Filter disemua tabel data.

@@ -38,6 +38,82 @@
         <!-- /.modal-dialog -->
       </div>
       <!-- /.modal -->
+      <div class="modal fade" id="modal-sms">
+        <div class="modal-dialog modal-default">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Filter Cetak</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="../assets/report/rkurir2.php" target="_blank" method="post">
+                <div class="input-group input-group-mb" style="margin-bottom: 10px">
+                <div class="input-group-prepend" style="width: 50%">
+                    <span class="input-group-text" style="width: 100%">Bulan</span>
+                </div>
+                <select name="bulan" class="form-control" required>
+                  <option value="">Pilih</option>
+                  <?php
+                    $ahay = mysqli_query($kon, "SELECT DISTINCT MONTH(tglbeli) as bulan FROM kirim INNER JOIN beli ON kirim.idbeli = beli.idbeli ORDER BY bulan ASC");
+                    while($baris = mysqli_fetch_array($ahay)) {
+                    $bulan = $baris['bulan']; 
+                      if($bulan == 1){ $namabulan = "Januari";
+                        }else if($bulan == 2){ $namabulan = "Februari";
+                        }else if($bulan == 3){ $namabulan = "Maret";
+                        }else if($bulan == 4){ $namabulan = "April";
+                        }else if($bulan == 5){ $namabulan = "Mei";
+                        }else if($bulan == 6){ $namabulan = "Juni";
+                        }else if($bulan == 7){ $namabulan = "Juli";
+                        }else if($bulan == 8){ $namabulan = "Agustus";
+                        }else if($bulan == 9){ $namabulan = "September";
+                        }else if($bulan == 10){ $namabulan = "Oktober";
+                        }else if($bulan == 11){ $namabulan = "November";
+                        }else if($bulan == 12){ $namabulan = "Desember";
+                        } ?><option value="<?= $baris[bulan] ?>"><?= $namabulan; ?></option> 
+                      }
+                    <?php } ?>
+                </select>
+              </div>
+                <div class="input-group input-group-mb" style="margin-bottom: 10px">
+                    <div class="input-group-prepend" style="width: 50%">
+                        <span class="input-group-text" style="width: 100%">Tahun</span>
+                    </div>
+                <select name="tahun" class="form-control">
+                <?php
+                    $ahay = mysqli_query($kon, "SELECT DISTINCT YEAR(tglbeli) as tahun FROM kirim INNER JOIN beli ON kirim.idbeli = beli.idbeli ORDER BY tahun ASC");
+                    while($baris = mysqli_fetch_array($ahay)) {
+                    $tahun = $baris['tahun']; 
+                        ?><option value="<?= $baris[tahun] ?>"><?= $tahun; ?></option> 
+                <?php } ?>
+                </select>
+                </div>
+                <div class="input-group input-group-mb" style="margin-bottom: 10px">
+                    <div class="input-group-prepend" style="width: 50%">
+                        <span class="input-group-text" style="width: 100%">Nama Kurir</span>
+                    </div>
+                <select name="namakurir" class="form-control" required>
+                  <option selected disabled>Pilih</option>
+                <?php
+                    $ahay = mysqli_query($kon, "SELECT * FROM kurir ORDER BY namakurir ASC");
+                    while($baris = mysqli_fetch_array($ahay)) {
+                        ?><option value="<?= $baris[namakurir] ?>"><?= $baris['namakurir'] ?></option> 
+                <?php } ?>
+                </select>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="reset" class="btn btn-danger"><i class="fas fa-sync-alt"></i></button>
+              <button type="submit" class="btn btn-dark"><i class="fas fa-file-pdf"></i></button>
+            </div>
+            </form>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <!-- /.modal -->
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -47,7 +123,8 @@
               <div class="card-header">
                 <h2 style="display:inline;">Kurir</h2>
                 <button style="float: right;margin-left: 5px" class="btn btn-dark" type="button" data-toggle="tooltip" data-placement="bottom" title="Tambah"><a href="kurir_input.php" class="text-white"><i class="fas fa-folder-plus"></i></a></button>
-                <button style="float: right" class="btn btn-dark" type="button" data-toggle="modal" data-target="#modal-sm" title="Cetak"><i class="fas fa-file-pdf"></i></button>
+                <button style="float: right;margin-left: 5px" class="btn btn-dark" type="button" data-toggle="modal" data-target="#modal-sm" title="Cetak"><i class="fas fa-file-pdf"></i></button>
+                <button style="float: right" class="btn btn-dark" type="button" data-toggle="modal" data-target="#modal-sms" title="Cetak"><i class="fas fa-file"></i></button>
               </div>
               <!-- /.card-header -->
               <div class="card-body">

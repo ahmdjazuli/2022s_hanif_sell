@@ -26,8 +26,6 @@ require "../../tgl_indo.php";
         <th>No</th>
         <th>Hari</th>
         <th>Transaksi Penjualan</th>
-        <th>Transaksi Service</th>
-        <th>Laba Kotor</th>
       </tr>
     </thead>
 <?php 
@@ -35,14 +33,11 @@ $i = 1;
 $total = 0;
 while( $data = mysqli_fetch_array($result) ) :
   $pendapatan1 = mysqli_fetch_array(mysqli_query($kon, "SELECT level, SUM(total) as total FROM beli INNER JOIN user ON beli.id = user.id WHERE DATE(tglbeli) = '$hari'"));
-  $pendapatan2 = mysqli_fetch_array(mysqli_query($kon, "SELECT level, SUM(total) as total FROM transaksi JOIN user ON transaksi.id = user.id WHERE DATE(tgl) = '$hari'"));
 ?> 
 <tr class="text-center">
   	<td><?= $i++; ?></td>
   	<td><?= haribulantahun($hari,true)?></td>          
 	  <td>Rp. <?= number_format($pendapatan1['total'],0,'.','.') ?></td>                   
-	  <td>Rp. <?= number_format($pendapatan2['total'],0,'.','.') ?></td>                   
-	  <td>Rp. <?= number_format($pendapatan1['total']+$pendapatan2['total'],0,'.','.') ?></td>                   
 </tr>
 <?php endwhile; ?>
   </table>

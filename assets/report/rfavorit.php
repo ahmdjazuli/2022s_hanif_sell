@@ -3,9 +3,12 @@ require "../../koneksi.php";
 require "../../tgl_indo.php";
 	$bulan 		= $_REQUEST['bulan'];
 	$tahun 		= $_REQUEST['tahun'];
+	$nama 		= $_REQUEST['nama'];
 
-	if($bulan AND $tahun ){
+	if($bulan AND $tahun AND empty($nama) ){
 		$result = mysqli_query($kon, "SELECT * FROM favorit JOIN tanam ON favorit.idtanam = tanam.idtanam JOIN user ON favorit.id = user.id WHERE MONTH(tgl) = '$bulan' AND YEAR(tgl) = '$tahun' ORDER BY tgl DESC");
+	}else if($bulan AND $tahun AND $nama ){
+		$result = mysqli_query($kon, "SELECT * FROM favorit JOIN tanam ON favorit.idtanam = tanam.idtanam JOIN user ON favorit.id = user.id WHERE MONTH(tgl) = '$bulan' AND YEAR(tgl) = '$tahun' AND nama = '$nama' ORDER BY tgl DESC");
 	}else{
 		$result = mysqli_query($kon, "SELECT * FROM favorit JOIN tanam ON favorit.idtanam = tanam.idtanam JOIN user ON favorit.id = user.id ORDER BY tgl DESC");
 	}
@@ -20,9 +23,11 @@ require "../../tgl_indo.php";
 <h3 style="text-align: center;">Laporan Favorit</h3>
 <h5 class="text-center">
 	<?php 
-	if($bulan AND $tahun){
+	if($bulan AND $tahun AND empty($nama)){
 		echo "Periode bulan ".$namabulan.' '.$tahun;
-	} ?>
+	}else if($bulan AND $tahun AND $nama){
+		echo "Periode bulan ".$namabulan.' '.$tahun.' dengan nama '.$nama;
+	}?>
 </h5>
 
 <div class="container-fluid">

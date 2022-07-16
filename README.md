@@ -16,6 +16,7 @@ Bahasa Pemograman :
 PERBAIKAN :
 1. Sudah dihapus keberadaan "Service Transaksi" di Pendapatan.
 2. Memperbaiki cetak report pendapatan bulanan dan harian.
+3. Tambahkan filter cetak berdasarkan nama di Data Favorit.
 
 REVISIAN BARU:
 1. Data Service dan Transaksi Service udh dihapus (Tabel yang dihapus di database ialah : transaksi, detail dan service)

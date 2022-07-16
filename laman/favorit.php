@@ -53,6 +53,19 @@
                 <?php } ?>
                 </select>
                 </div>
+                <div class="input-group input-group-mb" style="margin-bottom: 10px">
+                    <div class="input-group-prepend" style="width: 50%">
+                        <span class="input-group-text" style="width: 100%">Nama Pelanggan</span>
+                    </div>
+                <select name="nama" class="form-control">
+                  <option value="">SEMUA</option>
+                <?php
+                    $ahay = mysqli_query($kon, "SELECT * FROM favorit JOIN tanam ON favorit.idtanam = tanam.idtanam JOIN user ON favorit.id = user.id ORDER BY idfavorit DESC");
+                    while($baris = mysqli_fetch_array($ahay)) {
+                        ?><option value="<?= $baris[nama] ?>"><?= $baris[nama]; ?></option> 
+                <?php } ?>
+                </select>
+                </div>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="reset" class="btn btn-danger"><i class="fas fa-sync-alt"></i></button>

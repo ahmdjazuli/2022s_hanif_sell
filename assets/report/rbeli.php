@@ -27,7 +27,7 @@ require "../../tgl_indo.php";
 	if($bulan AND $tahun AND empty($status)){
 		echo "Periode bulan ".$namabulan.' '.$tahun;
 	}else if($bulan AND $tahun AND $status){
-		echo "Periode bulan ".$namabulan.' '.$tahun.' untuk status yang di'.$status;
+		echo "Periode bulan ".$namabulan.' '.$tahun.' untuk status yang di '.$status;
 	}?>
 </h5>
 <br>
